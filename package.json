@@ -1,9 +1,9 @@
 {
-  "name": "hmark.js",
+  "name": "highmark",
   "version": "0.0.1",
-  "description": "markup language",
+  "description": "another markup language",
   "main": "index.js",
-  "repository": "https://github.com/nipinium/hmark.js",
+  "repository": "https://github.com/nipinium/highmark",
   "author": "Nipinium",
-  "license": "MIT"
+  "license": "UNLICENSE"
 }
