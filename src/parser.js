@@ -1,16 +1,98 @@
-function parse(input) {
-  return parse_regular_block(input)
+module.exports = function parse(input) {
+  const lines = input.replace(/\r\n|\n\r|\n|\r/g, '\n').split('\n')
+
+  return parse_block(lines)
 }
 
-function parse_regular_block(input) {}
+const empty_re = /^\s*$/
+const ruler_re = /^\s*-{3,}\s*$/
+const headings_re = /^\s*(={1,6})(.+)$/
+const table_re = /^\s*\|(.+)\|\s*$/
+const blockquote_re = /^\s*>(.+)$/
+const codeblock_begin_re = /^\s*```(.*?)\s*$/
+const codeblock_close_re = /^\s*```\s*$/
+const tasklist_re = /^\s*-\s*\[( |x)\](.+)$/
+const nested_block_re = /^\s{2,}(.+)$/
+const ordered_list_re = /^\s*(\d+)\.(.+)$/
+const unordered_list_re = /^\s*-(.+)$/
 
-function parse_special_block(input) {}
+function parse_block(lines) {
+  var output = []
+  var idx = 0
 
-function parse_regular_inline(input) {}
+  while (idx < lines.length) {
+    const line = lines[idx]
 
-function parse_special_inline(input) {
+    // match empty lines
+    var raw = []
+    while ((match = line.match(empty_re))) {
+      raw.push(line)
+      idx += 1
+      line = lines[idx]
+    }
+    if (raw.length > 0) output.push({ tag: 'sp:blank', raw })
+
+    // match rulers
+    // TODO: match rulers with captions
+    if ((match = line.match(ruler_re))) {
+      output.push({ tag: 'sp:hr', raw })
+      idx += 1
+      continue
+    }
+
+    // match heading level 1-6
+    if ((match = line.match(headings_re))) {
+      let tag = 'sp:h' + match[1].length
+      let content = match[2]
+
+      output.push({ tag, raw: line, ctx: parse_inline(content) })
+      idx += 1
+      continue
+    }
+
+    // match table
+    raw = []
+    while ((match = line.match(table_re))) {
+      raw.push(line)
+      idx += 1
+      line = lines[idx]
+    }
+    if (raw.length > 0) {
+      let ctx = raw.map(x => x.split('|'))
+      // TODO: detect thead
+      // TODO: expand empty table cell
+      // TODO: parsing table cell
+      output.push({ tag: 'sp:table', raw, ctx })
+    }
+
+    // match blockquote
+    raw = []
+    while ((match = line.match(blockquote_re))) {
+      raw.push(line)
+      idx += 1
+      line = lines[idx]
+    }
+    if (raw.length > 0) {
+      let ctx = parse_block(raw)
+      output.push({ tag: 'sp:blockquote', raw, ctx })
+    }
+
+    // match paragraphs
+    raw = []
+    while (!line.match(empty_re)) {
+      raw.push(line)
+      idx += 1
+      line = lines[idx]
+    }
+    let ctx = raw.map(line => parse_inline(line))
+    output.push({ tag: 'sp:para', raw, ctx })
+  }
+
+  return output
+}
+
+function parse_inline(input) {
   if (!input) return []
-  console.log('input: ' + input)
 
   const re = /(.*?)([_*~^`])(.+?)\2(.*?)/g
   const match = re.exec(input)
@@ -37,20 +119,12 @@ function parse_special_inline(input) {
 function special_inline_name(mark) {
   switch (mark) {
     case '*':
-      return 'si:bold'
+      return 'sp:strong'
     case '_':
-      return 'si:italic'
+      return 'sp:em'
     case '^':
-      return 'si:superscript'
+      return 'sp:sup'
     case '~':
-      return 'si:subscript'
+      return 'sp:sub'
   }
 }
-
-module.exports = parse
-
-// console.log(parse_special_inline('text'))
-// console.log(parse_special_inline('*bold*'))
-// console.log(parse_special_inline('text *bold* text2'))
-// console.log(parse_special_inline('text * bold * text2'))
-console.log(parse_special_inline('text *^ bold ^* text2'))

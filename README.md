@@ -18,7 +18,7 @@ hm.to_html('*bold*')
 // "<p><strong>bold</strong></p>"
 
 hm.to_html(
-    'Lorem [b]ipsum /dolor/ sit[/b] amet, [url/text:consectetur]http://consectetur.com[/url] adipisicing elit'
+  'Lorem [b]ipsum /dolor/ sit[/b] amet, [url/text:consectetur]http://consectetur.com[/url] adipisicing elit'
 )
 // => "<p>Lorem <strong>ipsum <em>dolor</em> sit</strong> amet, <a href="http://consectetur.com">consectetur</a> adipisicing elit.</p>"
 ```
@@ -29,8 +29,8 @@ hm.to_html(
 
 **Markup:**
 
--   Inline element with no attribute: `{mark}content{/mark}`
--   Inline element With attributes: `{mark/attr1:value1/ attr2:value2}content{/mark}`
+- Inline element with no attribute: `{mark}content{/mark}`
+- Inline element With attributes: `{mark/attr1:value1/ attr2:value2}content{/mark}`
 
 **Example**
 
@@ -42,8 +42,8 @@ _Yield:_
 
 ```htm
 <p>
-    Lorem <strong>ipsum <em>dolor</em> sit</strong> amet,
-    <a href="http://consectetur.com">consectetur</a> adipisicing elit.
+  Lorem <strong>ipsum <em>dolor</em> sit</strong> amet,
+  <a href="http://consectetur.com">consectetur</a> adipisicing elit.
 </p>
 ```
 
@@ -111,14 +111,14 @@ _Output_
 _Markup_
 
 ```md
--   list item 1
--   list item 2
+- list item 1
+- list item 2
 ```
 
 _Output_
 
--   list item 1
--   list item 2
+- list item 1
+- list item 2
 
 **Ordered list**
 
@@ -178,72 +178,72 @@ TODO
 
 **Markup:**
 
--   No attribute:
+- No attribute:
 
-    ```
-    {{tag}}
-    content
-    {{/tag}}
-    ```
+  ```
+  {{tag}}
+  content
+  {{/tag}}
+  ```
 
--   With attributes:
+- With attributes:
 
-    ```
-    {{tag/attr1:value1/attr2:value2}}
-    content
-    {{/url}}
-    ```
+  ```
+  {{tag/attr1:value1/attr2:value2}}
+  content
+  {{/url}}
+  ```
 
--   full markup with option
-    ```
-    {{type/option:value}}
-    value
-    {{/type}}
-    ```
+- full markup with option
+  ```
+  {{type/option:value}}
+  value
+  {{/type}}
+  ```
 
 Examples:
 
 1. Syntax highlight
 
-    ```
-    {{code:ruby}}
-    print "Hey!"
-    {{/code}}
-    ```
+   ```
+   {{code:ruby}}
+   print "Hey!"
+   {{/code}}
+   ```
 
 2. Ascii art, poems
 
-    ```
-    {{text}}
-    /\_/\
-    =( °w° )=
-    )   (  //
-    (__ __)//
-    {{/text}}
-    ```
+   ```
+   {{text}}
+   /\_/\
+   =( °w° )=
+   )   (  //
+   (__ __)//
+   {{/text}}
+   ```
 
 3. Spoiler/collapsible block
 
-    ```
-    {{spl title="Spoiler"}}
-    Hidden content.
-    {{/spl}}
-    ```
+   ```
+   {{spl title="Spoiler"}}
+   Hidden content.
+   {{/spl}}
+   ```
 
 4. Math block
 
-    ```
-    {{math syntax=latext}}
-    \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-    {{/math}}
-    ```
+   ```
+   {{math syntax=latext}}
+   \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
+   {{/math}}
+   ```
 
 5. Hidden content
 
-    ```
-    {{crypt}}U2FsdGVkX18dmf1WcEODtR/m0vnPezX918/9/qHI56g={{/crypt}}
-    ```
+   ```
+   {{crypt}}U2FsdGVkX18dmf1WcEODtR/m0vnPezX918/9/qHI56g={{/crypt}}
+   ```
 
 ## License
 
-UNLICENSE
+MIT
