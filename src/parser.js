@@ -30,19 +30,19 @@ function parse_block(lines) {
       idx += 1
       line = lines[idx]
     }
-    if (raw.length > 0) output.push({ tag: 'sp:blank', raw })
+    if (raw.length > 0) output.push({ tag: 'br', raw })
 
     // match rulers
     // TODO: match rulers with captions
     if ((match = line.match(ruler_re))) {
-      output.push({ tag: 'sp:hr', raw })
+      output.push({ tag: 'hr', raw })
       idx += 1
       continue
     }
 
     // match heading level 1-6
     if ((match = line.match(headings_re))) {
-      let tag = 'sp:h' + match[1].length
+      let tag = 'h' + match[1].length
       let content = match[2]
 
       output.push({ tag, raw: line, ctx: parse_inline(content) })
@@ -62,7 +62,7 @@ function parse_block(lines) {
       // TODO: detect thead
       // TODO: expand empty table cell
       // TODO: parsing table cell
-      output.push({ tag: 'sp:table', raw, ctx })
+      output.push({ tag: 'table', raw, ctx })
     }
 
     // match blockquote
@@ -74,7 +74,7 @@ function parse_block(lines) {
     }
     if (raw.length > 0) {
       let ctx = parse_block(raw)
-      output.push({ tag: 'sp:blockquote', raw, ctx })
+      output.push({ tag: 'blockquote', raw, ctx })
     }
 
     // match paragraphs
@@ -85,7 +85,7 @@ function parse_block(lines) {
       line = lines[idx]
     }
     let ctx = raw.map(line => parse_inline(line))
-    output.push({ tag: 'sp:para', raw, ctx })
+    output.push({ tag: 'p', raw, ctx })
   }
 
   return output
