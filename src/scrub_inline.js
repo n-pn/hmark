@@ -21,46 +21,40 @@ function scrub_inline(tokens) {
   var out = ''
 
   for (let i = 0; i < tokens.length; i++) {
-    const token = tokens[i]
+    const { mark, char } = tokens[i]
 
-    switch (token.mark) {
-      case '*':
-      case '/':
-      case '`':
-        if (is_flank(tokens[i - 1])) {
-          var j = i + 1
-          var acc = []
+    if (mark == '*' || mark == '/' || mark == '`') {
+      if (is_flank(tokens[i - 1])) {
+        var j = i + 1
+        var acc = []
 
-          while (j < tokens.length) {
-            const curr = tokens[j]
+        while (j < tokens.length) {
+          const curr = tokens[j]
 
-            if (curr.mark == token.mark && is_flank(tokens[j + 1])) break
-            else {
-              acc.push(curr)
-              j += 1
-            }
+          if (curr.mark == mark && is_flank(tokens[j + 1])) break
+          else {
+            acc.push(curr)
+            j += 1
           }
+        }
 
-          if (j < tokens.length) {
-            if (token.mark == '*') {
-              out += `<strong>${scrub_inline(acc)}</strong>`
-            } else if (token.mark == '/') {
-              out += `<em>${scrub_inline(acc)}</em>`
-            } else {
-              var inner = acc.map(x => x.char).join('')
-              out += `<code>${inner}</code>`
-            }
-            i = j
+        if (j < tokens.length) {
+          if (mark == '*') {
+            out += `<strong>${scrub_inline(acc)}</strong>`
+          } else if (mark == '/') {
+            out += `<em>${scrub_inline(acc)}</em>`
           } else {
-            out += token.char
+            var inner = acc.map(x => x.char).join('')
+            out += `<code>${inner}</code>`
           }
-        } else out += token.char
 
-        break
+          i = j
+          continue
+        }
+      }
+    } else if (mark == '\n') out += '<br/>'
 
-      default:
-        out += token.char
-    }
+    out += char
   }
 
   return out
@@ -68,7 +62,7 @@ function scrub_inline(tokens) {
 
 function is_flank(token) {
   if (!token) return true
-  return token.mark == ' '
+  return token.mark == ' ' || token.mark == '\n'
 }
 
 function may_escape(token) {

@@ -10,11 +10,12 @@
 
 ## Implementing
 
-- [x] `*bold*`
-- [x] `/italic/`
-- [x] `` `code` ``
-- [ ] `<link>`
-- [ ] `!<image>`
+- [x] linebreak `\n`
+- [x] strong `*bold*`
+- [x] emphasis`/italic/`
+- [x] code `` `code` ``
+- [ ] link `<url>`
+- [ ] image link `!<url>`
 
 - [x] ruler `---`
 - [x] heading `=`, `==`, `===`
