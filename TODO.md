@@ -2,40 +2,33 @@
 
 ## Planning
 
-- [x] pull repo from github.com/nipinium/hmark
-- [x] change markup from double mark to single mark (eg `**` -> `*`)
-- [x] change italic from `'xyz'` to `/xyz/`
-- [x] remove extra markup, only keep bold, italic, subscript, superscript, code, link and image
-- [x] copy old code (rendering) from archived projects
-- [ ] write parser
-- [ ] finish renderer
-- [ ] add extensions
+- [ ] change italic from `/xyz/` to `_xyz_` ?
+- [ ] export html
+- [ ] support AST
+- [ ] syntax highlight from AST
+- [ ] allow writing custom renderers
 
 ## Implementing
 
-- [ ] `*bold*`
-- [ ] `/italic/`
-- [ ] `_underline_`
-- [ ] `-strikethrough-`
-- [ ] `^superscript^`
-- [ ] `~subscript~`
-- [ ] `` `code` ``
+- [x] `*bold*`
+- [x] `/italic/`
+- [x] `` `code` ``
 - [ ] `<link>`
 - [ ] `!<image>`
 
-- [ ] heading `=`, `==`, `===`
-- [ ] ruler `---`
-- [ ] blockquote `>`
+- [x] ruler `---`
+- [x] heading `=`, `==`, `===`
+- [x] blockquote `>`
 - [ ] todo `[ ]` and `[x]`
 - [ ] unordered list `-`
-- [ ] ordered list `1.` or `*`
+- [ ] ordered list `1.` or `+`
 - [ ] code block ` ``` `
 - [ ] table `|a|b|`
 
-- [ ] `[tag]content[/tag]`
-- [ ] block
+- [ ] custom inline tags, e.g. `[tag]content[/tag]`
+- [ ] custom block tags, e.g.
   ```
-  [[tag]]
+  [[tag:arg1:arg2/opt1:val1:val2/opt2:val3/val4]]
   body
   [[/tag]]
   ```
