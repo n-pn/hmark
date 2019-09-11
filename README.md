@@ -64,20 +64,16 @@ _Yield:_
 
 #### Inline
 
-| Type            | Special markup              | Html output                                         |
-| --------------- | --------------------------- | --------------------------------------------------- |
-| bold            | `*text*`                    | <strong>text</strong>                               |
-| italic          | `/text/`                    | <em>text</em>                                       |
-| underline       | `_text_`                    | <u>text</u>                                         |
-| strikethrough   | `-text-`                    | <s>text</s>                                         |
-| superscript     | `^text^`                    | <sup>text</sup>                                     |
-| subscript       | `~text~`                    | <sub>text</sub>                                     |
-| code            | `` `text` ``                | <code>text</code>                                   |
-| link            | `<http://example.com>`      | <a href="http://example.com">http://example.com</a> |
-| link with title | `<//google.com>(Google)>`   | <a href="//google.com">Google</a>                   |
-| image           | `!</fluidicon.png>`         | <img src="/fluidicon.png" alt="">                   |
-| image with alt  | `!</fluidicon.png>(github)` | <img src="/fluidicon.png" alt="github">             |
-| emoji           | `:grinning:`                | 😀                                                  |
+| Type            | Special markup             | Html output                                         |
+| --------------- | -------------------------- | --------------------------------------------------- |
+| bold            | `*text*`                   | <strong>text</strong>                               |
+| italic          | `/text/`                   | <em>text</em>                                       |
+| code            | `` `text` ``               | <code>text</code>                                   |
+| emoji           | `:grinning:`               | 😀                                                  |
+| link            | `<http://example.com>`     | <a href="http://example.com">http://example.com</a> |
+| link with title | `<//google.com>[Google]>`  | <a href="//google.com">Google</a>                   |
+| image           | `!<fluidicon.png>`         | <img src="fluidicon.png" alt="">                    |
+| image with alt  | `!<fluidicon.png>[github]` | <img src="fluidicon.png" alt="github">              |
 
 #### Single line
 

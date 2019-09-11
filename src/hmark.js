@@ -116,6 +116,24 @@ function scrub_inline(input) {
   console.log({ line: input })
 
   var chars = Array.from(input)
+
+  // tokenize
+  var tokens = []
+  var index = 0
+  var left_flank = true
+
+  while (index < chars.length) {
+    const char = chars[index]
+
+    if (char == '\\' && may_escape(chars[index + 1])) {
+      tokens.push({ type: char, char: chars[index + 1], left_flank })
+      index += 2
+      left_flank = false
+    } else {
+      tokens.push({ type: char, char, left_flank })
+    }
+  }
+
   var out = ''
   var acc = ''
   var idx = 0
@@ -127,7 +145,7 @@ function scrub_inline(input) {
     switch (char) {
       case '\\':
         var next = chars[idx + 1]
-        if (can_escape(next)) {
+        if (may_escape(next)) {
           idx += 2
           out += next
           continue
@@ -144,6 +162,23 @@ function scrub_inline(input) {
         out += char
         continue
 
+      case '*':
+      case '/':
+      case '_':
+      case '-':
+      case '`':
+        if (boundary) {
+        } else {
+          boundary = false
+          idx += 1
+          out += char
+          continue
+        }
+
+      case '^':
+      case '~':
+        continue
+
       default:
         idx += 1
         out += char
@@ -152,7 +187,7 @@ function scrub_inline(input) {
   return out
 }
 
-function can_escape(char) {
+function may_escape(char) {
   // re = /[ !"#$%&'()*+,\-./:;<=>?@\[\\\]^_`{|}~]/
   switch (char) {
     case ' ':
@@ -184,6 +219,7 @@ function can_escape(char) {
     case '|':
     case '}':
     case '~':
+    case '`':
     case '/':
       return true
     default:
