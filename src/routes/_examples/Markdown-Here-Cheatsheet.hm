@@ -2,7 +2,7 @@
 ---
 This is intended as a quick reference and showcase. For more complete info, see <http://daringfireball.net/projects/markdown/>(John Gruber's original spec).
 
-This cheatsheet is specifically /Markdown Here's/ version of Github-flavored Markdown. 
+<b>This</b> cheatsheet is specifically _Markdown Here's_ version of Github-flavored Markdown. 
 This differs slightly in styling and syntax from what Github uses, so what you see below might vary a little from what you get in a *Markdown Here* email, but it should be pretty close.
 
 ---
@@ -30,22 +30,18 @@ This differs slightly in styling and syntax from what Github uses, so what you s
 == Emphasis
 
 ```no-highlight
-Emphasis, aka italics, with *asterisks* or _underscores_.
+Emphasis, aka italics, with _underscores_.
 
-Strong emphasis, aka bold, with **asterisks** or __underscores__.
+Strong emphasis, aka bold, with *asterisks*.
 
-Combined emphasis with **asterisks and _underscores_**.
-
-Strikethrough uses two tildes. ~~Scratch this.~~
+Combined emphasis with *asterisks and _underscores_*.
 ```
 
-Emphasis, aka italics, with *asterisks* or _underscores_.
+Emphasis, aka italics, with _underscores_.
 
-Strong emphasis, aka bold, with **asterisks** or __underscores__.
+Strong emphasis, aka bold, with *asterisks*.
 
-Combined emphasis with **asterisks and _underscores_**.
-
-Strikethrough uses two tildes. ~~Scratch this.~~
+Combined emphasis with *asterisks and _underscores_*.
 
 
 <a name="lists"/>

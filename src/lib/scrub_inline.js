@@ -19,9 +19,15 @@ module.exports = function scrub(input) {
 function render_token(token) {
     if (token.char == '<') return '&lt;'
     else if (token.char == '>') return '&gt;'
-    else if (token.mark !== '/') return token.char
+    else if (token.mark !== '\\') return token.char
     if (token.char == ' ') return '&nbsp;'
     else return token.char
+}
+
+const link_re = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
+
+function is_link(link) {
+    return link_re.test(link)
 }
 
 function scrub_inline(tokens) {
@@ -31,7 +37,9 @@ function scrub_inline(tokens) {
         const tok = tokens[i]
 
         if (tok.mark == '<') {
-            let acc = ''
+            let link = ''
+            let text = ''
+
             let j = i + 1
             let match = false
 
@@ -41,15 +49,15 @@ function scrub_inline(tokens) {
                     match = true
                     break
                 }
-                acc += render_token(curr)
+                link += curr.char
+                text += render_token(curr)
                 j += 1
             }
 
             // check if link is a html tag
-            if (match && !acc.match(/^\/?[\w-]+$/)) {
+            if (match && is_link(link)) {
                 // check for text
-                const link = encodeURI(acc)
-                let text = link
+                link = encodeURI(link)
 
                 let cur = tokens[j + 1]
 
@@ -87,7 +95,7 @@ function scrub_inline(tokens) {
             }
         }
 
-        if (tok.mark === '*' || tok.mark === '/' || tok.mark === '`') {
+        if (tok.mark === '*' || tok.mark === '_' || tok.mark === '`') {
             let next = tokens[i + 1]
 
             if (is_char(next)) {
@@ -110,7 +118,7 @@ function scrub_inline(tokens) {
                 if (match) {
                     if (tok.mark === '*') {
                         out += `<strong>${scrub_inline(acc)}</strong>`
-                    } else if (tok.mark === '/') {
+                    } else if (tok.mark === '_') {
                         out += `<em>${scrub_inline(acc)}</em>`
                     } else {
                         var inner = acc.map(x => render_token(x)).join('')
