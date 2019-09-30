@@ -308,7 +308,10 @@ address {
     line-height: inherit;
 }
 
-p img {
-    display: inline;
-    max-width: 100%;
+p {
+    img,
+    svg {
+        display: inline;
+        max-width: 100%;
+    }
 }
