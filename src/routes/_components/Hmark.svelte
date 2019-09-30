@@ -96,6 +96,13 @@
   .m-btn {
     margin: 1rem auto;
   }
+  :global(p) {
+    img,
+    svg {
+      display: inline;
+      max-width: 100%;
+    }
+  }
 </style>
 
 <hr />
