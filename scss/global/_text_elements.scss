@@ -162,17 +162,27 @@ ol {
     counter-reset: li;
 }
 
+ul > li:before {
+    font-size: 1.3em;
+}
+
+ul.tasklist > li:before {
+    font-size: 1.2em;
+}
+
 li {
     display: block;
     position: relative;
-    padding-left: 1.125rem;
+    padding-left: 1.5rem;
+
     &:before {
         position: absolute;
         display: inline-block;
         @include color(neutral, 6);
-        // width: 1rem;
         top: 0;
         left: 0;
+        width: 1.5rem;
+        text-align: center;
     }
 
     &.uncheck:before {
