@@ -59,14 +59,14 @@
   .input {
     display: block;
     width: 100%;
-    min-height: 5rem;
     padding: 1rem;
+    overflow-y: scroll;
+
     @include corner(md, top);
 
     @include min-width(phablet) {
       flex: 1;
       resize: none;
-      overflow-y: scroll;
       @include corner(md, left);
     }
 

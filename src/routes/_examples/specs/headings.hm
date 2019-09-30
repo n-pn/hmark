@@ -1,6 +1,10 @@
 = Heading 1
+
 == Heading 2 with `code`
+
 === Heading 3 with <example.com>(link)
+
 ==== Heading 4 with *bold* and _italic_
+
 ===== Heading level 5
 ====== Heading level 6

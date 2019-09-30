@@ -10,50 +10,54 @@ const ruler_re = /^\s*-{3,}\s*$/
 const headings_re = /^\s*(={1,6})(.+)$/
 const blockquote_re = /^\s*>(.+)$/
 const codeblock_begin_re = /^\s*(`{3,})(.*?)\s*$/
-const tasklist_re = /^\s*-\s*\[( |x)\](.+)$/
-const nested_block_re = /^\s{2,}(.+)$/
-const ordered_list_re = /^\s*(\d+)\.(.+)$/
+const ordered_list_re = /^\s*\+(.+)$/
 const unordered_list_re = /^\s*-(.+)$/
+const tasklist_re = /^\s*\[( |x)\](.+)$/
+const nested_block_re = /^\s{2,}/
 
 function scrub_block(lines) {
-    let out = ''
+    let output = ''
+    let para = []
     let i = 0
 
     while (i < lines.length) {
         let line = lines[i]
 
-        // match empty line
-        let match = line.match(empty_re)
-        if (match) {
+        if (empty_re.test(line)) {
+            output += render_para(para)
+            para = []
+
             i += 1
             continue
         }
 
         // match rulers
         if ((match = line.match(ruler_re))) {
-            console.log({ ruler: i })
+            output += render_para(para)
+            para = []
 
-            out += `<hr />\n`
+            output += `<hr />\n`
+
             i += 1
             continue
         }
 
         // match heading level 1-6
         if ((match = line.match(headings_re))) {
-            console.log({ heading: i })
+            output += render_para(para)
+            para = []
 
             let tag = 'h' + match[1].length
-            // out.push({ tag, acc: line, ctx: scrub_inline(match[2]) })
-
             let inner = scrub_inline(match[2])
-            out += `<${tag}>${inner}</${tag}>\n`
+            output += `<${tag}>${inner}</${tag}>\n`
+
             i += 1
             continue
         }
 
         // match code block
         if ((match = line.match(codeblock_begin_re))) {
-            console.log({ code_block: i })
+            // console.log({ code_block: i })
 
             let mark = match[1]
             let lang = match[2] || 'text'
@@ -75,10 +79,13 @@ function scrub_block(lines) {
             }
 
             if (valid) {
-                console.log({ close_code: j })
+                // console.log({ close_code: j })
+                output += render_para(para)
+                para = []
 
                 let code = acc.join('\n')
-                out += render_code_block(code, lang)
+                output += render_code_block(code, lang)
+
                 i = j + 1
                 continue
             }
@@ -86,7 +93,10 @@ function scrub_block(lines) {
 
         // match blockquote
         if ((match = line.match(blockquote_re))) {
-            console.log({ blockquote: i })
+            output += render_para(para)
+            para = []
+
+            // console.log({ blockquote: i })
 
             let acc = [match[1]]
             let j = i + 1
@@ -99,31 +109,89 @@ function scrub_block(lines) {
                 }
                 break
             }
-            out += `<blockquote>${scrub_block(acc)}</blockquote>\n`
+
+            output += `<blockquote>${scrub_block(acc)}</blockquote>\n`
             i = j
             // continue
         }
 
-        // match paragraphs
-
-        console.log({ paragraph: i })
-
-        let acc = []
+        // match ordered lists
+        let ordered_list = ''
 
         while (i < lines.length) {
+            match = line.match(ordered_list_re)
+            if (!match) break
+
+            let acc = [match[1]]
+            let j = i + 1
+
+            while (j < lines.length) {
+                line = lines[j]
+
+                if (empty_re.test(line) || nested_block_re.test(line)) {
+                    acc.push(line.replace(/^\s\s/, ''))
+                    j += 1
+                } else break
+            }
+
+            i = j
             line = lines[i]
-            if (line.match(empty_re)) break
-            acc.push(line)
-            i += 1
+            // console.log({ acc })
+            ordered_list += '<li>\n' + scrub_block(acc) + '</li>\n'
         }
 
-        if (acc.length > 0) {
-            let inner = scrub_inline(acc.join('\n'))
-            out += `<p>${inner}</p>`
+        if (ordered_list !== '') {
+            output += render_para(para)
+            para = []
+
+            output += '<ol>\n' + ordered_list + '</ol>\n'
+            continue
         }
+
+        // match ordered lists
+        let unordered_list = ''
+
+        while (i < lines.length) {
+            match = line.match(unordered_list_re)
+            if (!match) break
+
+            let acc = [match[1]]
+            let j = i + 1
+
+            while (j < lines.length) {
+                line = lines[j]
+
+                if (empty_re.test(line) || nested_block_re.test(line)) {
+                    acc.push(line)
+                    j += 1
+                } else break
+            }
+
+            i = j
+            line = lines[i]
+            unordered_list += '<li>\n' + scrub_block(acc) + '</li>\n'
+        }
+
+        if (unordered_list !== '') {
+            output += render_para(para)
+            para = []
+
+            output += '<ul>\n' + unordered_list + '</ul>\n'
+            continue
+        }
+
+        para.push(line)
+        i += 1
     }
 
-    return out
+    output += render_para(para)
+    return output
+}
+
+function render_para(paras) {
+    if (paras.length == 0) return ''
+    let inner = scrub_inline(paras.join('\n'))
+    return `<p>${inner}</p>\n`
 }
 
 function render_code_block(code, lang) {
