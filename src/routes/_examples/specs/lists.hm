@@ -1,3 +1,5 @@
+=== Ordered lists
+
 + Ordered list start with a plush
 + Another item
   - Unordered sub-list.
@@ -8,6 +10,14 @@
   + Another sub-list
  
    Some text that should be aligned with the above item.
+
+=== Unordered lists
+
 - Unordered list can use minuses only
 - Another unordered list
   Test paragraph same line.
+
+=== Task lists
+[ ] Task 1
+[ ] Task 2
+[x] Finished task

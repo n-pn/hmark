@@ -148,7 +148,7 @@ function scrub_block(lines) {
             continue
         }
 
-        // match ordered lists
+        // match unordered lists
         let unordered_list = ''
 
         while (i < lines.length) {
@@ -177,6 +177,32 @@ function scrub_block(lines) {
             para = []
 
             output += '<ul>\n' + unordered_list + '</ul>\n'
+            continue
+        }
+
+        // match unordered lists
+        let task_list = ''
+
+        while (i < lines.length) {
+            match = line.match(tasklist_re)
+            if (!match) break
+
+            let status = match[1] == 'x' ? 'checked' : 'uncheck'
+            let content = match[2]
+
+            task_list += `<li class="${status}">`
+            task_list += scrub_inline(content)
+            task_list += '</li>\n'
+
+            i += 1
+            line = lines[i]
+        }
+
+        if (task_list !== '') {
+            output += render_para(para)
+            para = []
+
+            output += '<ul class="tasklist">\n' + task_list + '</ul>\n'
             continue
         }
 

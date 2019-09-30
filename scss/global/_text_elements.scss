@@ -169,10 +169,18 @@ li {
     &:before {
         position: absolute;
         display: inline-block;
-        @include color(primary, 6);
+        @include color(neutral, 6);
         // width: 1rem;
         top: 0;
         left: 0;
+    }
+
+    &.uncheck:before {
+        content: '☐';
+    }
+
+    &.checked:before {
+        content: '✓';
     }
 }
 
