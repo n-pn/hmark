@@ -55,7 +55,7 @@ _Yield:_
 | Type            | Special markup             | Html output                                         |
 | --------------- | -------------------------- | --------------------------------------------------- |
 | bold            | `*text*`                   | <strong>text</strong>                               |
-| italic          | `/text/`                   | <em>text</em>                                       |
+| italic          | `_text_`                   | <em>text</em>                                       |
 | code            | `` `text` ``               | <code>text</code>                                   |
 | emoji           | `:grinning:`               | 😀                                                  |
 | link            | `<http://example.com>`     | <a href="http://example.com">http://example.com</a> |

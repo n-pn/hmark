@@ -45,7 +45,7 @@
     display: block;
     width: 100%;
 
-    @include min-width(tablet) {
+    @include min-width(phablet) {
       display: flex;
     }
 
@@ -63,7 +63,7 @@
     padding: 1rem;
     @include corner(md, top);
 
-    @include min-width(tablet) {
+    @include min-width(phablet) {
       flex: 1;
       resize: none;
       overflow-y: scroll;
@@ -80,7 +80,7 @@
     width: 100%;
     @include bgcolor(white);
     @include corner(md, bottom);
-    @include min-width(tablet) {
+    @include min-width(phablet) {
       flex: 1;
       @include corner(md, right);
     }
