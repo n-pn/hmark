@@ -8,9 +8,9 @@
   }
   main {
     position: relative;
-    max-width: 56em;
+    max-width: 72rem;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem;
   }
 </style>
 

@@ -6,8 +6,9 @@ More specifically, it's based on [Github-flavored Markdown](https://help.github.
 This section explains the syntax and capabilities of Markdown that Spec Markdown
 supports and augments.
 
+-----
 
-## Character Encoding
+== Character Encoding
 
 Markdown allows you to write text which uses &, <, and >. The output HTML will
 automatically use the `&amp;`, `&lt;`, and `&gt;` entities.
@@ -15,8 +16,9 @@ automatically use the `&amp;`, `&lt;`, and `&gt;` entities.
 Well formed HTML entities can be written inline directly. If you write `&copy;`,
 it will appear in the HTML output as &copy;.
 
+----
 
-### Escape sequence
+=== Escape sequence
 
 Markdown makes use of certain characters to format text, in order to render one
 explicitly, place a backslash before it.
@@ -53,7 +55,7 @@ Markdown allows for inline stylistic and structual formatting. Inline
 formatting is allowed in paragraphs, list items, and table cells.
 
 
-### Inline HTML
+=== Inline HTML
 
 Markdown is not a replacement for HTML and instead leverages HTML by allowing
 its use inline within paragraphs, links, etc.
@@ -63,7 +65,7 @@ This code has <blink>blinking</blink> and <em>emphasized</em> formatting.
 Markdown syntax can continue to be <u>used *within* inline HTML</u>.
 
 
-### Links
+=== Links
 
 Use `[ ]` square brackets to indicate linked text followed immediately by `( )`
 parenthesis to describe the URL the text will link to.
@@ -83,8 +85,9 @@ Todo: Links do not yet support a reference style short-form.
 
 Todo: Links do not yet support a title attribute.
 
+---
 
-### Emphasis
+=== Emphasis
 
 Wrapping asterisks *(\*)* indicate emphasis. Like Github-flavored
 Markdown, Spec Markdown does not treat underscore *(_)* as emphasis.
@@ -99,7 +102,7 @@ Example of **bold** and *italic* and ***bold italic***.
 
 
 
-### Inline Code
+=== Inline Code
 
 Wrapping back-ticks *(\`)* indicate inline code, text inside back-ticks is not
 formatted, allowing for special characters to be used in inline code without
@@ -117,7 +120,7 @@ This is an `example` of some inline code.
 Todo: Markdown's double-back-tick syntax is not yet supported.
 
 
-### Images
+=== Images
 
 ```
 ![Specs](http://i.imgur.com/aV8o3rE.png)
@@ -171,7 +174,7 @@ by at least two new lines. Spec Markdown makes use of Markdown's blocks to
 produce more specific structural formatting.
 
 
-### Block HTML
+=== Block HTML
 
 Markdown is not a replacement for HTML and instead leverages HTML by allowing
 its use as complete blocks when separated from surrounding content by blank
@@ -254,7 +257,7 @@ Mister Death
 </pre>
 
 
-### Section Headers
+=== Section Headers
 
 Regular Markdown supports two styles of headers, Setext and atx, however Spec
 Markdown generally only supports atx style headers.
@@ -271,7 +274,7 @@ Header
 ```
 
 The number of `#` characters refers to the depth of the section. To produce an,
-`<h3>`, type `###`. Optionally, a header may be "closed" by any number of `#`
+`<h3>`, type `===`. Optionally, a header may be "closed" by any number of `#`
 characters.
 
 Note: Spec Markdown requires that documents start with `#` and that each section
@@ -279,13 +282,13 @@ contained within is only one level deeper. An \<h1> section may only contain
 \<h2> sections.
 
 
-### Paragraphs
+=== Paragraphs
 
 Paragraphs are the most simple Markdown blocks. Lines are appended together to
 form a single \<p> tag. Any inline syntax is allowed within a paragraph.
 
 
-### Lists
+=== Lists
 
 Markdown lists are lines which each start with either a ordered bullet `1.` or
 unordered bullet, `*`, `-`, or `+`. Lists are optionally indented by two spaces.
@@ -309,7 +312,7 @@ Produces the following:
   4. list
 
 
-### Code Block
+=== Code Block
 
 A block of code is formed by either indenting by 4 spaces, or wrapping with
 <code>\`\`\`</code> on their own lines.
@@ -325,16 +328,16 @@ var code = sample();
 ```
 
 
-### Block Quotes
+=== Block Quotes
 
 Spec markdown does not yet support Markdown's `>` style block quotes.
 
 
-### Horizontal Rules
+=== Horizontal Rules
 
 Spec Markdown does not yet support Markdown's `---` style \<hr>.
 
 
-### Automatic Links
+=== Automatic Links
 
 Spec Markdown does not yet automatically link urls.

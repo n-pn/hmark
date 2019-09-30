@@ -1,9 +1,9 @@
 <script>
-	import Hmark from './_components/Hmark.svelte'
+  import Hmark from "./_components/Hmark.svelte";
 </script>
 
 <svelte:head>
-	<title>Highmark</title>
+  <title>Highmark</title>
 </svelte:head>
 
-<Hmark name="spec" />
+<Hmark name="Markdown-Here-Cheatsheet" />

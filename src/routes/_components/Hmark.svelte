@@ -40,6 +40,9 @@
 <style lang="scss">
   .hmark {
     display: flex;
+    width: 100%;
+    // overflow-wrap: break-word;
+    // @include clearfix;
     @include corner(md);
     @include bdcolor(neutral, 3);
   }
@@ -59,8 +62,11 @@
     padding: 1rem;
     max-height: 80vh;
     overflow-y: scroll;
-    word-wrap: break-word;
+    word-break: break-word; /* Chrome, Safari */
+    overflow-wrap: anywhere; /* Firefox */
+    // word-break: keep-all;
   }
+
   .m-btn {
     margin-top: 1rem;
   }
