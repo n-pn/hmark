@@ -1,0 +1,4 @@
+This is intended as a quick reference and showcase. For more complete info, see <http://daringfireball.net/projects/markdown/>(John Gruber's original spec).
+
+<b>This</b> cheatsheet is specifically _Markdown Here's_ version of Github-flavored Markdown.
+This differs slightly in styling and syntax from what Github uses, so what you see below might vary a little from what you get in a *Markdown Here* email, but it should be pretty close.

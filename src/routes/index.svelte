@@ -6,4 +6,11 @@
   <title>Highmark</title>
 </svelte:head>
 
-<Hmark name="Markdown-Here-Cheatsheet" />
+<h1>Highmark cheatsheet</h1>
+
+<Hmark title="Lists" name="specs/lists" />
+<Hmark title="Headings" name="specs/headings" />
+<Hmark title="Sample paragraph" name="specs/sample-paragraph" />
+<Hmark title="Emphasis" name="specs/emphasis" />
+
+<Hmark title="remain" name="specs/remain" />

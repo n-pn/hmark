@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
 
+  export let title = "";
   export let name = "spec";
 
   let data = "";
@@ -15,6 +16,8 @@
   });
 
   async function render() {
+    html = "rendering...";
+
     const res = await fetch("/api/render", {
       method: "POST",
       headers: {
@@ -39,28 +42,51 @@
 
 <style lang="scss">
   .hmark {
-    display: flex;
+    display: block;
     width: 100%;
+
+    @include min-width(tablet) {
+      display: flex;
+    }
+
+    @include shadow(md);
     // overflow-wrap: break-word;
     // @include clearfix;
-    @include corner(md);
-    @include bdcolor(neutral, 3);
+    // @include corner(md);
+    // @include bdcolor(neutral, 3);
   }
 
   .input {
-    width: 50%;
-    margin-right: auto;
+    display: block;
+    width: 100%;
+    min-height: 5rem;
     padding: 1rem;
-    min-height: 25rem;
-    @include font-size(sm);
+    @include corner(md, top);
+
+    @include min-width(tablet) {
+      flex: 1;
+      resize: none;
+      overflow-y: scroll;
+      @include corner(md, left);
+    }
+
+    // @include font-size(sm);
     @include font-family(mono);
+    @include bgcolor(neutral, 7);
+    @include color(neutral, 2);
   }
 
   .output {
-    width: 50%;
-    margin-left: auto;
+    width: 100%;
+    @include bgcolor(white);
+    @include corner(md, bottom);
+    @include min-width(tablet) {
+      flex: 1;
+      @include corner(md, right);
+    }
+
     padding: 1rem;
-    max-height: 80vh;
+    max-height: 40rem;
     overflow-y: scroll;
     word-break: break-word; /* Chrome, Safari */
     overflow-wrap: anywhere; /* Firefox */
@@ -68,9 +94,12 @@
   }
 
   .m-btn {
-    margin-top: 1rem;
+    margin: 1rem auto;
   }
 </style>
+
+<hr />
+<h2>{title}</h2>
 
 <div class="hmark">
   <textarea class="input" bind:value={data} on:change={render} />
