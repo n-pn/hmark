@@ -18,10 +18,11 @@ module.exports = function scrub(input) {
 
 function render_token(token) {
     if (token.char == '<') return '&lt;'
-    else if (token.char == '>') return '&gt;'
-    else if (token.mark !== '\\') return token.char
+    if (token.char == '>') return '&gt;'
+    if (token.char == '\n') return '<br />\n'
+    if (token.mark !== '\\') return token.char
     if (token.char == ' ') return '&nbsp;'
-    else return token.char
+    return token.char
 }
 
 const link_re = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
@@ -132,38 +133,6 @@ function scrub_inline(tokens) {
         }
 
         out += render_token(tok)
-
-        // if (mark === '*' || mark === '/' || mark === '`') {
-        //     if (tokens[i + 1].mark) == ' ' continue
-        //     if (left_flank(tokens[i - 1])) {
-        //         var j = i + 1
-        //         var acc = []
-
-        //         while (j < tokens.length) {
-        //             const curr = tokens[j]
-
-        //             if (curr.mark === mark && right_flank(tokens[j + 1])) break
-        //             else {
-        //                 acc.push(curr)
-        //                 j += 1
-        //             }
-        //         }
-
-        //         if (j < tokens.length) {
-        //             if (mark === '*') {
-        //                 out += `<strong>${scrub_inline(acc)}</strong>`
-        //             } else if (mark === '/') {
-        //                 out += `<em>${scrub_inline(acc)}</em>`
-        //             } else {
-        //                 var inner = acc.map(x => x.char).join('')
-        //                 out += `<code>${inner}</code>`
-        //             }
-
-        //             i = j
-        //             continue
-        //         }
-        //     }
-        // } else if (mark === '\n') out += '<br />\n'
     }
 
     return out

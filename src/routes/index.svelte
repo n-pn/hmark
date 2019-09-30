@@ -13,4 +13,4 @@
 <Hmark title="Sample paragraph" name="specs/sample-paragraph" />
 <Hmark title="Emphasis" name="specs/emphasis" />
 
-<!-- <Hmark title="remain" name="specs/remain" /> -->
+<Hmark title="remain" name="specs/remain" />

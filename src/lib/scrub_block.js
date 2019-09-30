@@ -162,7 +162,7 @@ function scrub_block(lines) {
                 line = lines[j]
 
                 if (empty_re.test(line) || nested_block_re.test(line)) {
-                    acc.push(line)
+                    acc.push(line.replace(/^\s\s/, ''))
                     j += 1
                 } else break
             }
@@ -188,9 +188,9 @@ function scrub_block(lines) {
     return output
 }
 
-function render_para(paras) {
-    if (paras.length == 0) return ''
-    let inner = scrub_inline(paras.join('\n'))
+function render_para(para) {
+    if (para.length == 0) return ''
+    let inner = scrub_inline(para.join('\n'))
     return `<p>${inner}</p>\n`
 }
 
