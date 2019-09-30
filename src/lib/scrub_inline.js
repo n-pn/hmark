@@ -25,10 +25,10 @@ function render_token(token) {
     return token.char
 }
 
-const link_re = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
+const url_re = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
 
-function is_link(link) {
-    return link_re.test(link)
+function is_url(url) {
+    return url_re.test(url)
 }
 
 function scrub_inline(tokens) {
@@ -38,8 +38,8 @@ function scrub_inline(tokens) {
         const tok = tokens[i]
 
         if (tok.mark == '<') {
-            let link = ''
-            let text = ''
+            let url = ''
+            let alt = []
 
             let j = i + 1
             let match = false
@@ -50,35 +50,35 @@ function scrub_inline(tokens) {
                     match = true
                     break
                 }
-                link += curr.char
-                text += render_token(curr)
+                url += curr.char
+                alt.push(curr)
                 j += 1
             }
 
-            // check if link is a html tag
-            if (match && is_link(link)) {
+            // check if url is a html tag
+            if (match && is_url(url)) {
                 // check for text
-                link = encodeURI(link)
+                url = encodeURI(url)
 
                 let cur = tokens[j + 1]
 
                 if (cur && cur.mark === '(') {
-                    let found = false
-                    let acc = ''
+                    let valid = false
+                    let acc = []
 
                     let k = j + 2
                     while (k < tokens.length) {
                         let tk = tokens[k]
                         if (tk.mark == ')') {
-                            found = true
+                            valid = true
                             break
                         }
-                        acc += render_token(tk)
+                        acc.push(tk)
                         k += 1
                     }
 
-                    if (found) {
-                        text = acc
+                    if (valid) {
+                        alt = acc
                         j = k
                     }
                 }
@@ -86,14 +86,15 @@ function scrub_inline(tokens) {
                 const prev = tokens[i - 1]
                 if (prev && prev.mark === '!') {
                     out = out.slice(0, -1)
-                    out += `<img src="${link}" alt="${text}"/>`
+                    alt = alt.map(x => render_token(x)).join('')
+                    out += `<img src="${url}" alt="${alt}"/>`
                 } else {
-                    out += `<a href="${link}" rel="noopener noreferrer">${text}</a>`
+                    alt = scrub_inline(alt)
+                    out += `<a href="${url}" rel="noopener noreferrer">${alt}</a>`
                 }
 
                 i = j
                 continue
-                // yep, this is a link
             }
         }
 

@@ -1,7 +1,6 @@
 Images are just some link with a `!` before.
 
-Images are inlined: !</favicon.png>(favicon)
+Images are inlined: <//hmark.nipin.xyz>(!</favicon.png>)
 
 Large image will be resized:
-
 !</imgs/screenshot.png>(screenshot)

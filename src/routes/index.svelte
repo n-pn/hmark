@@ -11,9 +11,9 @@
 <Hmark title="Links" name="specs/links" />
 <Hmark title="Images" name="specs/images" />
 
-<Hmark title="Lists" name="specs/lists" />
 <Hmark title="Headings" name="specs/headings" />
-<Hmark title="Sample paragraph" name="specs/sample-paragraph" />
 <Hmark title="Emphasis" name="specs/emphasis" />
+<Hmark title="Lists" name="specs/lists" />
+<Hmark title="Sample paragraph" name="specs/sample-paragraph" />
 
 <Hmark title="remain" name="specs/remain" />
