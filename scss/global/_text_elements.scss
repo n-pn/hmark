@@ -21,7 +21,7 @@ hr {
     @include spacing();
     // @include font-family(narrow);
     @include font-weight(normal);
-    @include color(neutral, 8);
+    @include color(primary, 7);
 }
 
 h1 {
@@ -122,7 +122,7 @@ var {
 main a,
 section a,
 article a {
-    $bdcolor: f-color(primary, 5);
+    $bdcolor: f-color(teal, 5);
 
     color: currentColor;
     text-decoration: none;
@@ -178,7 +178,7 @@ li {
     &:before {
         position: absolute;
         display: inline-block;
-        @include color(neutral, 6);
+        @include color(primary, 7);
         top: 0;
         left: 0;
         width: 1.5rem;

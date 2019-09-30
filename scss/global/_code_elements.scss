@@ -14,13 +14,13 @@ code {
 }
 
 kbd {
-    @include color(neutral, 6);
+    @include color(neutral, 7);
     @include border(f-color(neutral, 4));
     @include shadow(xs);
 }
 
 code {
-    @include color(primary, 7);
+    @include color(neutral, 7);
     @include bgcolor(neutral, 2);
 }
 
