@@ -1,0 +1,7 @@
+There are two type of links.
+
+Link with text <https://www.google.com>(Google)
+
+And links with no text <http://www.example.com> 
+
+Invalid links (that looks similar to html tags) will be ignored, for example <b>, </i>, <a href="">...

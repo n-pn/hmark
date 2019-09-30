@@ -85,6 +85,7 @@ function scrub_inline(tokens) {
 
                 const prev = tokens[i - 1]
                 if (prev && prev.mark === '!') {
+                    out = out.slice(0, -1)
                     out += `<img src="${link}" alt="${text}"/>`
                 } else {
                     out += `<a href="${link}" rel="noopener noreferrer">${text}</a>`

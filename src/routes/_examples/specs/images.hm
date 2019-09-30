@@ -1,0 +1,7 @@
+Images are just a links with a `!` before.
+
+Images are inlined: !</favicon.png>(favicon)
+
+Large image will be resized:
+
+!</imgs/screenshot.png>(screenshot)
