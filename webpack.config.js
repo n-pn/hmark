@@ -22,10 +22,7 @@ const { preprocess } = require('./svelte.config')
 
 module.exports = {
     client: {
-        entry: {
-            global: path.join(__dirname, 'scss/global.scss'),
-            main: path.join(__dirname, 'src/client.js'),
-        },
+        entry: config.client.entry(),
         output: config.client.output(),
         resolve: { alias, extensions, mainFields },
         module: {
@@ -35,7 +32,7 @@ module.exports = {
                     use: {
                         loader: 'svelte-loader',
                         options: {
-                            emitCss: false,
+                            emitCss: true,
                             preprocess,
                             dev,
                             hydratable: true,
