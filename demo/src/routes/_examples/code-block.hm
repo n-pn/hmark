@@ -4,24 +4,33 @@ Inline `code` has `back-ticks around` it.
 Block `code` fenced by lines with at least three back-ticks `\`\`\``.
 Note that the closing fence must have the same amount of `\``.
 
-Syntax highlight:
+==== Syntax highlight
+
+Plaintext:
 
 ```
 No language indicated, so no syntax highlighting.
 But let's throw in a <b>tag</b>.
 ```
 
+Javascript:
+
 ```js
 var s = "JavaScript syntax highlighting";
 alert(s);
 ```
+
+Python:
 
 ```python
 s = "Python syntax highlighting"
 print s
 ```
 
+Markdown:
+
 ````md
+# Markdown
 ```rb
 puts 'no syntax highlight on nested code block'
 ```

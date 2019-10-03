@@ -1,9 +1,0 @@
-There are two type of links.
-
-Links with no text <http://www.example.com> 
-Link with text <https://www.google.com>(Google)
-
-Link with markup inside texts: <https://www.github.com>(*go _here!_*)
-
-
-Invalid links (that looks similar to html tags) will be ignored, for example <b>, </i>, <a href="">...
