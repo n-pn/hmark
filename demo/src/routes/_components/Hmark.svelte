@@ -78,7 +78,7 @@
   }
 
   .output {
-    margin-top: 0;
+    margin-top: 0 !important;
     width: 100%;
     @include bgcolor(white);
     @include corner(md, bottom);
