@@ -1,7 +1,7 @@
 > Blockquotes are very handy in email to emulate reply text.
 > 
 > This line is part of the same quote.
-> > This line belongs to a nested quote.
+>> This line belongs to a nested quote.
 > > This line also
 > Return to the first level
 Quote break.

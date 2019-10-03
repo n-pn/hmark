@@ -112,6 +112,24 @@
   //   margin: 0 -0.125em;
   //   padding: 0 0.125em;
   // }
+
+  :global(table) {
+    th,
+    td {
+      padding: 0.5rem 1rem;
+      @include border(f-color(neutral, 3), 1px);
+    }
+
+    th {
+      @include color(primary, 8);
+      font-weight: normal;
+    }
+
+    thead,
+    tr:nth-child(even) {
+      @include bgcolor(neutral, 1);
+    }
+  }
 </style>
 
 <hr />

@@ -7,11 +7,13 @@ Colons can be used to align columns.
 | zebra stripes | are neat      |    $1 |
 
 The outer pipes (|) are required.
-You don't need to make the raw text line up prettily. 
+You don't need to make the raw text line up prettily.
 Inline markups inside table cell are permitted.
 Cell can be expanded to 2 or more columns.
 
-| Markdown | Less | Pretty |
+=== with colspan
+
+| Markup | Less | Pretty |
 | --- | --- | --- |
 | *Still* | `renders` | _nicely_ |
 | 1 | 2 | 3 |
@@ -19,3 +21,12 @@ Cell can be expanded to 2 or more columns.
 |1 | 2 3 ||
 | 1 2 3 |||
 
+=== Single row table
+
+| single | row | table|
+
+==== Table with no head
+
+| 1 | 2 | 3 |
+| 4 | 5 | 6 |
+| 7 | 8 | 9 |
