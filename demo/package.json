@@ -16,6 +16,7 @@
         "sirv": "^0.4.0"
     },
     "devDependencies": {
+        "@nipin/hmark": "file:..",
         "@nipin/melte": "https://github.com/nipinium/melte",
         "css-loader": "^3.2.0",
         "mini-css-extract-plugin": "^0.8.0",

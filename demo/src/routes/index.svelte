@@ -8,12 +8,12 @@
 
 <h1>Highmark cheatsheet</h1>
 
-<Hmark title="Links" name="specs/links" />
-<Hmark title="Images" name="specs/images" />
+<Hmark title="Links" name="links" />
+<Hmark title="Images" name="images" />
 
-<Hmark title="Headings" name="specs/headings" />
-<Hmark title="Emphasis" name="specs/emphasis" />
-<Hmark title="Lists" name="specs/lists" />
-<Hmark title="Sample paragraph" name="specs/sample-paragraph" />
+<Hmark title="Headings" name="headings" />
+<Hmark title="Emphasis" name="emphasis" />
+<Hmark title="Lists" name="lists" />
+<Hmark title="Sample paragraph" name="sample-paragraph" />
 
-<Hmark title="remain" name="specs/remain" />
+<Hmark title="remain" name="remain" />
