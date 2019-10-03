@@ -8,5 +8,8 @@
         "index.js",
         "src/**/*.js",
         "dist/**/*.js"
-    ]
+    ],
+    "dependencies": {
+        "highlight.js": "^9.15.10"
+    }
 }

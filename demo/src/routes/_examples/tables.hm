@@ -1,0 +1,21 @@
+Colons can be used to align columns.
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
+The outer pipes (|) are required.
+You don't need to make the raw text line up prettily. 
+Inline markups inside table cell are permitted.
+Cell can be expanded to 2 or more columns.
+
+| Markdown | Less | Pretty |
+| --- | --- | --- |
+| *Still* | `renders` | _nicely_ |
+| 1 | 2 | 3 |
+| 1 2 || 3 |
+|1 | 2 3 ||
+| 1 2 3 |||
+

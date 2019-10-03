@@ -1,0 +1,31 @@
+
+Inline `code` has `back-ticks around` it.
+
+Block `code` fenced by lines with at least three back-ticks `\`\`\``.
+Note that the closing fence must have the same amount of `\``.
+
+Syntax highlight:
+
+```
+No language indicated, so no syntax highlighting.
+But let's throw in a <b>tag</b>.
+```
+
+```js
+var s = "JavaScript syntax highlighting";
+alert(s);
+```
+
+```python
+s = "Python syntax highlighting"
+print s
+```
+
+````md
+```rb
+puts 'no syntax highlight on nested code block'
+```
+````
+
+
+Again, to see what languages are available for highlighting, and how to write those language names, see the <http://softwaremaniacs.org/media/soft/highlight/test.html>(highlight.js demo page).

@@ -1,4 +1,5 @@
 const scrub_inline = require('./scrub_inline')
+const highlight = require('./utils/highlight')
 
 module.exports = function hmark(input) {
     const lines = input.replace(/\r\n|\n\r|\r/g, '\n').split('\n')
@@ -222,6 +223,9 @@ function render_para(para) {
 
 function render_code_block(code, lang) {
     // TODO: syntax highlight
-    const data = code.split('\n').join('\n')
-    return `<pre><code data-lang="${lang}">${data}</code></pre>`
+    // const data = code.split('\n').join('\n')
+    return `<pre><code data-lang="${lang}">${highlight(
+        code,
+        lang
+    )}</code></pre>`
 }

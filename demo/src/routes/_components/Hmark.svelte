@@ -61,6 +61,7 @@
     width: 100%;
     padding: 1rem;
     overflow-y: scroll;
+    border: none;
 
     @include corner(md, top);
 
