@@ -78,6 +78,7 @@
   }
 
   .output {
+    margin-top: 0;
     width: 100%;
     @include bgcolor(white);
     @include corner(md, bottom);
@@ -104,13 +105,13 @@
       max-width: 100%;
     }
   }
-  article :global(a) {
-    display: inline-block;
-    line-height: inherit;
-    @include color(primary, 6);
-    margin: 0 -0.125em;
-    padding: 0 0.125em;
-  }
+  // article :global(a) {
+  //   display: inline-block;
+  //   line-height: inherit;
+  //   @include color(primary, 6);
+  //   margin: 0 -0.125em;
+  //   padding: 0 0.125em;
+  // }
 </style>
 
 <hr />

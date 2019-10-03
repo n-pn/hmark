@@ -1,35 +1,11 @@
 
 == Horizontal Rule
 
-```
-Three or more...
+Three or more hyphens `-`, like this:
 
 ---
 
-Hyphens
-
-***
-
-Asterisks
-
-___
-
-Underscores
-```
-
-Three or more...
-
----
-
-Hyphens
-
-***
-
-Asterisks
-
-___
-
-Underscores
+Asterisks or underscores don't work.
 
 <a name="lines"/>
 

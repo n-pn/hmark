@@ -107,9 +107,10 @@ function scrub_block(lines) {
                 if ((match = line.match(blockquote_re))) {
                     acc.push(match[1])
                     j += 1
-                }
-                break
+                } else break
             }
+
+            console.log({ blockquote: acc })
 
             output += `<blockquote>${scrub_block(acc)}</blockquote>\n`
             i = j
