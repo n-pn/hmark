@@ -18,12 +18,13 @@ TODO
 **Markup:**
 
 -   Inline element with no attribute: `[mark]content[/mark]`
--   Inline element With attributes: `[mark/attr1:value1/ attr2:value2]content[/mark]`
+-   Inline element with attributes: `[mark attr1="value1" attr2="value2"]content[/mark]`
+-   Inline element short hand: `[mark body="content" /]`
 
 **Example**
 
 ```bbcode
-Lorem [b]ipsum [i]dolor[/i] sit[/b] amet, [url/text:consectetur]http://consectetur.com[/url] adipisicing elit.
+Lorem [b]ipsum [i]dolor[/i] sit[/b] amet, [url href="http://consectetur.com"]consectetur[/url] adipisicing elit.
 ```
 
 _Yield:_
@@ -109,8 +110,8 @@ _Output_
 _Markup_
 
 ```md
-1. list item 1
-2. list item 2
+-   list item 1
+-   list item 2
 ```
 
 _Output_
@@ -165,24 +166,22 @@ TODO
 -   No attribute:
 
     ```
-    [tag]
+    [[tag]]
     content
-    [/tag]
+    [[/tag]]
     ```
 
 -   With attributes:
 
     ```
-    [tag/attr1:value1/attr2:value2]
+    [[tag attr1="value1" attr2="value2"]]
     content
     [/url]
     ```
 
--   full markup with option
+-   auto closing
     ```
-    [type/option:value]
-    value
-    [/type]
+    [[tag option="value" body="content" /]]
     ```
 
 Examples:
@@ -190,42 +189,44 @@ Examples:
 1. Syntax highlight
 
     ```
-    [code:ruby]
+    [[code lang="ruby"]]
     print "Hey!"
-    [/code]
+    [[/code]]
     ```
 
 2. Ascii art, poems
 
     ```
-    [text]
+    [[ascii]]
     /\_/\
     =( °w° )=
     )   (  //
     (__ __)//
-    [/text]
+    [[/ascii]]
     ```
 
 3. Spoiler/collapsible block
 
     ```
-    [spl title="Spoiler"]
+    [[spoiler title="Spoiler"]]
     Hidden content.
-    [/spl]
+    [[/spoiler]]
     ```
 
 4. Math block
 
     ```
-    [math syntax=latext]
+    [[math syntax="latext"]]
     \Gamma(z) = \int_0^\infty t^[z-1]e^[-t]dt\,.
-    [/math]
+    [[/math]]
     ```
 
 5. Hidden content
 
     ```
-    [crypt]U2FsdGVkX18dmf1WcEODtR/m0vnPezX918/9/qHI56g=[/crypt]
+    [[crypted hash="hmark"]]
+    U2FsdGVkX18dmf1WcEODtR/m0vnPezX918/9/qHI56g=
+    [[/crypted]]
     ```
 
 ## License

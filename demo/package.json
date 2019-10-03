@@ -1,0 +1,29 @@
+{
+    "name": "@nipin/hmark-demo",
+    "description": "showcase for highmark",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "dev": "sapper dev",
+        "build": "sapper build",
+        "export": "sapper export",
+        "start": "node __sapper__/build"
+    },
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "compression": "^1.7.4",
+        "polka": "next",
+        "sirv": "^0.4.0"
+    },
+    "devDependencies": {
+        "@nipin/melte": "https://github.com/nipinium/melte",
+        "css-loader": "^3.2.0",
+        "mini-css-extract-plugin": "^0.8.0",
+        "node-sass": "^4.12.0",
+        "sapper": "^0.27.0",
+        "sass-loader": "^8.0.0",
+        "svelte": "^3.0.0",
+        "svelte-loader": "https://github.com/rixo/svelte-loader",
+        "webpack": "^4.7.0"
+    }
+}

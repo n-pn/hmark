@@ -1,29 +1,6 @@
 {
-  "name": "hmark",
-  "description": "Implementation of highmark in javascript",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "dev": "sapper dev --no-hot",
-    "build": "sapper build",
-    "export": "sapper export",
-    "start": "node __sapper__/build"
-  },
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "compression": "^1.7.4",
-    "polka": "next",
-    "sirv": "^0.4.0"
-  },
-  "devDependencies": {
-    "css-loader": "^3.2.0",
-    "mini-css-extract-plugin": "^0.8.0",
-    "nodemon": "^1.19.2",
-    "sapper": "^0.27.0",
-    "sass": "^1.22.12",
-    "sass-loader": "^8.0.0",
-    "svelte": "^3.0.0",
-    "svelte-loader": "https://github.com/rixo/svelte-loader",
-    "webpack": "^4.7.0"
-  }
+    "name": "@nipin/hmark",
+    "description": "Implementation of highmark in javascript",
+    "version": "0.0.1",
+    "private": false
 }
