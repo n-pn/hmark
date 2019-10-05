@@ -45,7 +45,7 @@
     display: block;
     width: 100%;
 
-    @include min-width(phablet) {
+    @include screen-min(phablet) {
       display: flex;
     }
 
@@ -63,12 +63,13 @@
     overflow-y: scroll;
     border: none;
 
-    @include corner(md, top);
+    @include corner-top(md);
 
-    @include min-width(phablet) {
+    @include screen-min(phablet) {
       flex: 1;
       resize: none;
-      @include corner(md, left);
+      @include corner(0);
+      @include corner-left(md);
     }
 
     // @include font-size(sm);
@@ -78,26 +79,31 @@
   }
 
   .output {
-    margin-top: 0 !important;
+    display: block;
     width: 100%;
     @include bgcolor(white);
-    @include corner(md, bottom);
-    @include min-width(phablet) {
+    @include corner-bottom(lg);
+    @include screen-min(phablet) {
       flex: 1;
-      @include corner(md, right);
+      @include corner(0);
+      @include corner-right(lg);
     }
 
-    padding: 1rem;
     max-height: 40rem;
+
     overflow-y: scroll;
-    word-break: break-word; /* Chrome, Safari */
-    overflow-wrap: anywhere; /* Firefox */
+    // word-break: break-word; /* Chrome, Safari */
+    // overflow-wrap: anywhere; /* Firefox */
     // word-break: keep-all;
   }
 
+  article {
+    padding: 1rem;
+  }
   .m-btn {
     margin: 1rem auto;
   }
+
   :global(p) {
     img,
     svg {
@@ -117,7 +123,7 @@
     th,
     td {
       padding: 0.5rem 1rem;
-      @include border(f-color(neutral, 3), 1px);
+      @include border(color(neutral, 3), 1px);
     }
 
     th {
@@ -137,9 +143,12 @@
 
 <div class="hmark">
   <textarea class="input" bind:value={data} on:change={render} />
-  <article class="output">
-    {@html html}
-  </article>
+  <div class="output">
+    <article>
+      {@html html}
+    </article>
+  </div>
+
 </div>
 
 <button class="m-btn" on:click={save}>Save</button>
