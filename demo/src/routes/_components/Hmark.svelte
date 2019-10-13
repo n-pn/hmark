@@ -63,6 +63,11 @@
     overflow-y: scroll;
     border: none;
 
+    @include color(neutral, 2);
+    @include bgcolor(neutral, 7);
+    // @include font-size(sm);
+    @include font-family(mono);
+
     @include corner-top(md);
 
     @include screen-min(phablet) {
@@ -71,70 +76,31 @@
       @include corner(0);
       @include corner-left(md);
     }
-
-    // @include font-size(sm);
-    @include font-family(mono);
-    @include bgcolor(neutral, 7);
-    @include color(neutral, 2);
   }
 
   .output {
     display: block;
     width: 100%;
+
+    max-height: 40rem;
+    overflow-y: scroll;
+
     @include bgcolor(white);
     @include corner-bottom(lg);
+
     @include screen-min(phablet) {
       flex: 1;
       @include corner(0);
       @include corner-right(lg);
     }
-
-    max-height: 40rem;
-
-    overflow-y: scroll;
-    // word-break: break-word; /* Chrome, Safari */
-    // overflow-wrap: anywhere; /* Firefox */
-    // word-break: keep-all;
   }
 
   article {
     padding: 1rem;
   }
+
   .m-btn {
     margin: 1rem auto;
-  }
-
-  :global(p) {
-    img,
-    svg {
-      display: inline;
-      max-width: 100%;
-    }
-  }
-  // article :global(a) {
-  //   display: inline-block;
-  //   line-height: inherit;
-  //   @include color(primary, 6);
-  //   margin: 0 -0.125em;
-  //   padding: 0 0.125em;
-  // }
-
-  :global(table) {
-    th,
-    td {
-      padding: 0.5rem 1rem;
-      @include border(color(neutral, 3), 1px);
-    }
-
-    th {
-      @include color(primary, 8);
-      font-weight: normal;
-    }
-
-    thead,
-    tr:nth-child(even) {
-      @include bgcolor(neutral, 1);
-    }
   }
 </style>
 
