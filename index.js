@@ -1,8 +1,16 @@
-const scrub_block = require('./src/scrub_block')
-const scrub_inline = require('./src/scrub_inline')
+const render_blocks = require('./src/render_blocks')
+const scan_blocks = require('./src/scan_blocks')
+const render_inline = require('./src/render_inline')
+const scan_inline = require('./src/scan_inline')
 
 function hmark(input) {
-  return scrub_block(input)
+    return render_blocks(input)
 }
 
-module.exports = { hmark, scrub_block, scrub_inline }
+module.exports = {
+    hmark,
+    render_blocks,
+    render_inline,
+    scan_blocks,
+    scan_inline,
+}

@@ -1,34 +1,18 @@
-const utils = require('./parse_utils')
-
-module.exports = function parse(input) {
-    const lines = input
-        .replace(/\t/g, '    ') // convert tabs to 4 spaces
-        .replace(/\r\n|\n\r|\r/g, '\n') // convert to `lf` unix line ending
-        .split('\n')
-
-    return parse_block(lines)
-}
-
-function parse_block(lines) {
+module.exports = function(lines) {
     const trims = lines.map(x => x.trim())
 
     let output = []
-    let i = 0
 
-    while (i < lines.length) {
+    for (let i = 0; i < lines.length; i++) {
         let last = output[output.length - 1] || {}
-
-        // let line = lines[i]
         let trim = trims[i]
 
-        // for empty lines
-        if (trim === '') {
-            output.push({ tag: 'br' })
-            i += 1
-            continue
-        }
-
         switch (trim.charAt(0)) {
+            // for empty lines
+            case '':
+                output.push({ tag: 'nl' })
+                break
+
             // headings
             case '=':
                 let h_lv = 1
@@ -36,50 +20,46 @@ function parse_block(lines) {
 
                 output.push({
                     tag: 'h' + h_lv,
-                    inner: trim.substring(h_lv),
+                    body: trim.substring(h_lv),
                 })
-
-                i += 1
-                continue
+                break
 
             // blockquote
             case '>':
                 let bq_text = trim.substring(1)
 
                 if (last.tag == 'blockquote') {
-                    last.inner.push(bq_text)
+                    last.body.push(bq_text)
                 } else {
-                    output.push({ tag: 'blockquote', inner: [bq_text] })
+                    output.push({ tag: 'blockquote', body: [bq_text] })
                 }
-
-                i += 1
-                continue
+                break
 
             // ordered list
             case '+':
-                let ol_inner = [trim.substring(1)]
+                let ol_body = [trim.substring(1)]
 
                 // scan for list item's nested content
                 let ol_j = i + 1
 
-                while (ol_j < ol_inner.length) {
-                    let line = lines[j]
+                while (ol_j < lines.length) {
+                    let line = lines[j].replace(/\t/g, '    ')
 
                     if (!utils.is_blank(line.charAt(0))) break
                     if (!utils.is_blank(line.charAt(1))) break
 
-                    ol_inner.push(line.substring(2))
+                    ol_body.push(line.substring(2))
                     ol_j += 1
                 }
 
                 if (last.tag == 'ol') {
-                    last.items.push(ol_inner)
+                    last.body.push(ol_body)
                 } else {
-                    output.push({ tag: 'ol', items: [ol_inner] })
+                    output.push({ tag: 'ol', body: [ol_body] })
                 }
 
-                i = ol_j
-                continue
+                i = ol_j - 1
+                break
 
             // ruler or unordered list
             case '-':
@@ -87,35 +67,33 @@ function parse_block(lines) {
 
                 if (/^-{3,}$/.test(trim)) {
                     output.push({ tag: 'hr' })
-
-                    i += 1
-                    continue
+                    break
                 }
 
                 // for unordered list
-                let ul_inner = [trim.substring(1)]
+                let ul_body = [trim.substring(1)]
 
                 // scan for list item's nested content
                 let ul_j = i + 1
 
-                while (ul_j < ul_inner.length) {
-                    let line = lines[j]
+                while (ul_j < lines.length) {
+                    let line = lines[j].replace(/\t/g, '    ')
 
                     if (!utils.is_blank(line.charAt(0))) break
                     if (!utils.is_blank(line.charAt(1))) break
 
-                    ul_inner.push(line.substring(2))
+                    ul_body.push(line.substring(2))
                     ul_j += 1
                 }
 
                 if (last.tag == 'ul') {
-                    last.items.push(ul_inner)
+                    last.body.push(ul_body)
                 } else {
-                    output.push({ tag: 'ul', items: [ul_inner] })
+                    output.push({ tag: 'ul', body: [ul_body] })
                 }
 
-                i = ul_j
-                continue
+                i = ul_j - 1
+                break
 
             // check list or div block
             case '[':
@@ -129,13 +107,11 @@ function parse_block(lines) {
                     }
 
                     if (last.tag == 'tl') {
-                        last.items.push(task)
+                        last.body.push(task)
                     } else {
-                        output.push({ tag: 'tl', items: [task] })
+                        output.push({ tag: 'tl', body: [task] })
                     }
-
-                    i += 1
-                    continue
+                    break
                 }
 
                 // check custom div block
@@ -144,7 +120,8 @@ function parse_block(lines) {
                     trim.charAt(trim.length - 1) === ']' &&
                     trim.charAt(trim.length - 2) === ']'
                 ) {
-                    let [name, attrs] = utils.split_once(trim)
+                    let body = trim.substring(2, trim.length - 2)
+                    let [name, attrs] = utils.split_once(body)
 
                     // is self closed
                     if (attrs.charAt(attrs.length - 1) === '/') {
@@ -153,42 +130,66 @@ function parse_block(lines) {
                         output.push({
                             tag: 'div',
                             name,
-                            attrs: utils.parse_attrs(attrs),
+                            body: [],
+                            attrs: utils.parse_block_attrs(attrs),
                             short: true,
                         })
-
-                        i += 1
-                        continue
+                        break
                     }
 
                     // check for closing tag
-                    let close_tag = `[[/${name}]]`
-                    let close_pos = i + 1
+                    let ctag = `[[/${name}]]`
+                    let cpos = i + 1
 
-                    while (
-                        close_pos < lines.length &&
-                        trims[close_pos] !== close_tag
-                    ) {
-                        close_pos += 1
-                    }
+                    for (; cpos < lines.length && trims[cpos] !== ctag; cpos++);
 
                     // if a closing tag is really found
-                    if (close_pos < lines.length) {
+                    if (cpos < lines.length) {
                         let body = []
-                        for (let j = i + 1; j < close_pos; j++) {
-                            body.push(lines[j])
-                        }
+
+                        for (let j = i + 1; j < cpos; j++) body.push(lines[j])
 
                         output.push({
-                            tag: 'div',
+                            tag: 'custom',
                             name,
-                            body: body.join('\n'),
-                            attrs: utils.parse_attrs(attrs),
+                            body,
+                            attrs: utils.parse_block_attrs(attrs),
                             short: false,
                         })
 
-                        i = close_pos + 1
-                        continue
+                        i = cpos
+                        break
+                    }
+                }
+
+            // code block
+            case '`':
+                let cb_count = 1
+                while (trim.charAt(cb_count) === '`') cb_count += 1
+
+                if (cb_count >= 3) {
+                    let cb_mark = trim.substring(0, cb_count)
+                    let cb_lang = trim.substring(cb_count)
+
+                    let offset = i + 1
+                    while (offset < lines.length && trims[offset] !== cb_mark) {
+                        offset += 1
+                    }
+
+                    if (offset < lines.length) {
+                        let cb_body = []
+                        for (let cb_j = i + 1; cb_j < offset; cb_j++) {
+                            cb_body.push(lines[cb_j])
+                        }
+
+                        output.push({
+                            tag: 'code',
+                            body: cb_body.join('\n'),
+                            attrs: { lang: cb_lang },
+                        })
+
+                        i = offset
+                        break
                     }
                 }
 
@@ -204,19 +205,16 @@ function parse_block(lines) {
                         output.push({ tag: 'table', rows: [cols] })
                     }
 
-                    i += 1
-                    continue
+                    break
                 }
 
-            // normal paragraph
+            // regular paragraph
             default:
                 if (last.tag === 'p') {
-                    last.inner += '\n' + trim
+                    last.body += '\n' + trim
                 } else {
-                    output.push({ tag: 'p', inner: trim })
+                    output.push({ tag: 'p', body: trim })
                 }
-
-                i += 1
         }
     }
 

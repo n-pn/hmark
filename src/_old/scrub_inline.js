@@ -133,6 +133,36 @@ function scrub_inline(tokens) {
                 }
             }
         }
+        // else if (token.mark === '[') {
+        //     // enter custom markup
+        //     let inner = ''
+        //     let j = i + 1
+        //     let valid = false
+        //     while (j < tokens.length) {
+        //         if (token[j] === ']') {
+        //             valid = true
+        //             break
+        //         }
+
+        //         inner += render_token(token[j])
+        //         j += 1
+        //     }
+
+        //     if (valid && inner !== '') {
+        //         let [mark, ...attrs] = inner.split(' ')
+
+        //         // only accept alphabet characters as valid tag
+        //         if (/^\w+$/.test(mark)) {
+        //             let valid = false
+        //             // check if tag is self wrapped
+        //             if (inner.trim().charAt(inner.lnegth - 1) === '/') {
+        //                 valid = true
+        //             } else {
+        //                 let k = j + 1
+        //             }
+        //         }
+        //     }
+        // }
 
         out += render_token(tok)
     }

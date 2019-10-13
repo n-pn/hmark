@@ -1,5 +1,5 @@
 const scrub_inline = require('./scrub_inline')
-const highlight = require('./utils/highlight')
+const highlight = require('../rendering/render_code')
 
 module.exports = function hmark(input) {
     const lines = input.replace(/\r\n|\n\r|\r/g, '\n').split('\n')
@@ -233,8 +233,6 @@ function render_para(para) {
 }
 
 function render_code_block(code, lang) {
-    // TODO: syntax highlight
-    // const data = code.split('\n').join('\n')
     return `<pre><code data-lang="${lang}">${highlight(
         code,
         lang
@@ -284,8 +282,6 @@ function valid_table_align(cols) {
 // console.log(valid_table_align([':-----', '------:', ':-:', ': --- :']))
 
 function render_tr(cols, aligns, tag) {
-    console.log({ tag, cols })
-
     let output = '<tr>\n'
 
     let i = 0
