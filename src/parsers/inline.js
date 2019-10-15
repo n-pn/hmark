@@ -6,13 +6,13 @@ module.exports = (input, opts = {}) => {
 }
 
 const parsers = {
-    '`': { id: 'code', fn: require('./inline/code') },
-    '<': { id: 'link', fn: require('./inline/link') },
-    '!': { id: 'image', fn: require('./inline/image') },
-    ':': { id: 'emoji', fn: require('./inline/emoji') },
-    '[': { id: 'custom', fn: require('./inline/custom') },
-    '*': { id: 'emphasis', fn: require('./inline/emphasis') },
-    '_': { id: 'emphasis', fn: require('./inline/emphasis') },
+    '`': { name: 'code', call: require('./inline/code') },
+    '<': { name: 'link', call: require('./inline/link') },
+    '!': { name: 'image', call: require('./inline/image') },
+    ':': { name: 'emoji', call: require('./inline/emoji') },
+    '[': { name: 'custom', call: require('./inline/custom') },
+    '*': { name: 'emphasis', call: require('./inline/emphasis') },
+    '_': { name: 'emphasis', call: require('./inline/emphasis') },
 }
 
 function parse(input, opts = {}) {
@@ -22,9 +22,9 @@ function parse(input, opts = {}) {
     for (let i = 0; i < input.length; i++) {
         let parser = parsers[input[i][0]]
 
-        if (parser && opts[parser.id] !== false) {
-            if ((match = parser.fn(input, i))) {
-                if (parser.id === 'emphasis') {
+        if (parser && opts[parser.name] !== false) {
+            if ((match = parser.call(input, i))) {
+                if (parser.name === 'emphasis') {
                     match.output.body = parse(match.output.body, opts)
                 }
                 output.push(match.output)
