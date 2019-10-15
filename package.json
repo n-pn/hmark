@@ -10,8 +10,7 @@
         "dist/**/*.js"
     ],
     "dependencies": {
-        "highlight.js": "^9.15.10",
-        "xregexp": "^4.2.4"
+        "highlight.js": "^9.15.10"
     },
     "devDependencies": {
         "jest": "^24.9.0"
