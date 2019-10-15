@@ -53,15 +53,15 @@ _Yield:_
 
 #### Inline
 
-| Type            | Special markup                | Html output                                                                           |
-| --------------- | ----------------------------- | ------------------------------------------------------------------------------------- |
-| bold            | `*text*`                      | <strong>text</strong>                                                                 |
-| italic          | `_text_`                      | <em>text</em>                                                                         |
-| code            | `` `text` ``                  | <code>text</code>                                                                     |
-| emoji           | `:grinning:`                  | 😀                                                                                    |
-| link            | `<http://example.com>`        | <a href="http://example.com">http://example.com</a>                                   |
-| link with title | `<google.com>(Google)`        | <a href="//google.com">Google</a>                                                     |
-| image           | <<https://picsum.photos/200>> | <a href="https://picsum.photos/200"><img src="https://picsum.photos/200" alt=""/></a> |
+| Type            | Special markup                 | Html output                                                                           |
+| --------------- | ------------------------------ | ------------------------------------------------------------------------------------- |
+| bold            | `*text*`                       | <strong>text</strong>                                                                 |
+| italic          | `_text_`                       | <em>text</em>                                                                         |
+| code            | `` `text` ``                   | <code>text</code>                                                                     |
+| emoji           | `:grinning:`                   | 😀                                                                                    |
+| link            | `<http://example.com>`         | <a href="http://example.com">http://example.com</a>                                   |
+| link with title | `<google.com>(Google)`         | <a href="//google.com">Google</a>                                                     |
+| image           | `!<https://picsum.photos/200>` | <a href="https://picsum.photos/200"><img src="https://picsum.photos/200" alt=""/></a> |
 
 #### Single line
 

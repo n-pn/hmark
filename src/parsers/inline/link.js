@@ -2,17 +2,9 @@ module.exports = function(input, offset = 0) {
     if (offset + 5 > input.length) return null // minimal valid input is <a.x>
 
     const output = {
-        tag: 'url',
+        tag: 'link',
         href: '',
         body: [],
-    }
-
-    let skipped = false // for `<<link_url>` case
-
-    // try matching <<image_url>>
-    if (input[offset + 1][0] === '<') {
-        output.tag = 'img'
-        offset += 1
     }
 
     for (offset = offset + 1; offset < input.length; offset++) {
@@ -23,16 +15,6 @@ module.exports = function(input, offset = 0) {
 
     if (offset >= input.length) return null
     if (is_html_tag(output.href)) return null
-
-    // match <<image_url>>
-    if (output.tag === 'img') {
-        if (input[offset + 1] && input[offset + 1][0] === '>') {
-            offset += 1
-        } else {
-            output.tag = 'url' // revert tag type
-            skipped = true
-        }
-    }
 
     // scan for alternative link body
     let index = offset + 1
@@ -51,7 +33,7 @@ module.exports = function(input, offset = 0) {
         }
     }
 
-    return { output, offset, skipped }
+    return { output, offset }
 }
 
 // const URL_RE = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-\w()@:%\+.~#?&//=]*)/
