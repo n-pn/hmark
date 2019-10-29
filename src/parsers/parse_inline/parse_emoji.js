@@ -1,4 +1,4 @@
-module.exports = function scan_emoji(input, offset) {
+module.exports = function parse_emoji(input, offset) {
     const output = { tag: 'emoji', body: [] }
 
     offset += 1

@@ -1,4 +1,4 @@
-module.exports = function scan_code(input, offset) {
+module.exports = function parse_code(input, offset) {
     const next = input[offset + 1]
     if (!next || next[0] === ' ') return null
 

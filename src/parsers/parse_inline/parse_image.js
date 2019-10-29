@@ -1,4 +1,4 @@
-const parse_link = require('./link')
+const parse_link = require('./parse_link')
 
 module.exports = function(input, offset = 0) {
     if (!input[offset + 1] || input[offset + 1][0] !== '<') return null

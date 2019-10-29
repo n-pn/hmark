@@ -1,4 +1,4 @@
-const parse_inline = require('./inline')
+const parse_inline = require('./parse_inline')
 
 function body_for(str) {
     return Array.from(str).map(x => [x, x])

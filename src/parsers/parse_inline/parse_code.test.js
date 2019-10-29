@@ -1,4 +1,4 @@
-const parse_code = require('./code')
+const parse_code = require('./parse_code')
 
 const { tokenize } = require('../utils')
 

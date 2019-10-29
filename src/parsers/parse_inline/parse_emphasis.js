@@ -1,4 +1,4 @@
-module.exports = function scan_emphasis(input, offset = 0) {
+module.exports = function parse_emphasis(input, offset = 0) {
     if (invalid_left(input, offset)) return null
 
     const mark = input[offset][0]

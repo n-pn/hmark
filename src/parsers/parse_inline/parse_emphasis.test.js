@@ -1,4 +1,4 @@
-const parse_emphasis = require('./emphasis')
+const parse_emphasis = require('./parse_emphasis')
 
 const { tokenize } = require('../utils')
 

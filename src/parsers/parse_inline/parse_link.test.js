@@ -1,17 +1,23 @@
-const parse_image = require('./image')
+const parse_link = require('./parse_link')
 
 const { tokenize } = require('../utils')
 
 function parse(input) {
     const tokens = tokenize(input)
-    return parse_image(tokens, 0)
+    return parse_link(tokens, 0)
 }
 
-test('parses simple image', () => {
-    const inp = '!<a.b>'
+test('ignores html tags', () => {
+    expect(parse('<a b>')).toEqual(null)
+    expect(parse('<a>')).toEqual(null)
+    expect(parse('</a>')).toEqual(null)
+})
+
+test('parses simple link', () => {
+    const inp = '<a.b>'
     const out = {
         output: {
-            tag: 'image',
+            tag: 'link',
             href: 'a.b',
             body: Array.from('a.b').map(x => [x, x]),
         },
@@ -21,11 +27,11 @@ test('parses simple image', () => {
     expect(parse(inp)).toEqual(out)
 })
 
-test('parses image with text', () => {
-    const inp = '!<a.b>(c)'
+test('parses link with text', () => {
+    const inp = '<a.b>(c)'
     const out = {
         output: {
-            tag: 'image',
+            tag: 'link',
             href: 'a.b',
             body: [['c', 'c']],
         },

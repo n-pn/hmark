@@ -6,13 +6,13 @@ module.exports = (input, opts = {}) => {
 }
 
 const parsers = {
-    '`': { name: 'code', call: require('./inline/code') },
-    '<': { name: 'link', call: require('./inline/link') },
-    '!': { name: 'image', call: require('./inline/image') },
-    ':': { name: 'emoji', call: require('./inline/emoji') },
-    '[': { name: 'custom', call: require('./inline/custom') },
-    '*': { name: 'emphasis', call: require('./inline/emphasis') },
-    '_': { name: 'emphasis', call: require('./inline/emphasis') },
+    '`': { name: 'code', call: require('./parse_inline/parse_code') },
+    '<': { name: 'link', call: require('./parse_inline/parse_link') },
+    '!': { name: 'image', call: require('./parse_inline/parse_image') },
+    ':': { name: 'emoji', call: require('./parse_inline/parse_emoji') },
+    '[': { name: 'custom', call: require('./parse_inline/parse_custom') },
+    '*': { name: 'emphasis', call: require('./parse_inline/parse_emphasis') },
+    '_': { name: 'emphasis', call: require('./parse_inline/parse_emphasis') },
 }
 
 function parse(input, opts = {}) {

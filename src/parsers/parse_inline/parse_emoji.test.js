@@ -1,4 +1,4 @@
-const parse_emoji = require('./emoji')
+const parse_emoji = require('./parse_emoji')
 
 const { tokenize } = require('../utils')
 
