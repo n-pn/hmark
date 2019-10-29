@@ -1,4 +1,4 @@
-const utils = require('./utils')
+const utils = require('./parse_utils')
 
 describe('parse attributes', () => {
     test('return empty', () => {

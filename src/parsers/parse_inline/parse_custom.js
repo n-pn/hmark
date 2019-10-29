@@ -1,4 +1,4 @@
-const { parse_attrs } = require('../utils')
+const { parse_attrs } = require('../parse_utils')
 
 module.exports = function(input, index = 0) {
     const N = input.length

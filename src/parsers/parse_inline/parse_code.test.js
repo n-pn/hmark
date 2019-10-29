@@ -1,6 +1,6 @@
 const parse_code = require('./parse_code')
 
-const { tokenize } = require('../utils')
+const { tokenize } = require('../parse_utils')
 
 function parse(input) {
     const tokens = tokenize(input)

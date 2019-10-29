@@ -1,4 +1,4 @@
-const { tokenize } = require('./utils')
+const { tokenize } = require('./parse_utils')
 
 module.exports = (input, opts = {}) => {
     if (typeof input === 'string') input = tokenize(input)
