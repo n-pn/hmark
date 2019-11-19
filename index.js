@@ -1,16 +1,6 @@
-const render_blocks = require('./src/render_blocks')
-const scan_blocks = require('./src/scan_blocks')
-const render_inline = require('./src/render_inline')
-const scan_inline = require('./src/scan_inline')
+const render_blocks = require('./src/render_block')
 
-function hmark(input) {
-    return render_blocks(input)
-}
-
-module.exports = {
-    hmark,
-    render_blocks,
-    render_inline,
-    scan_blocks,
-    scan_inline,
+module.exports = (input, options) => {
+    const lines = input.replace(/\r\n|\n\r|\r/g, '\n').split('\n')
+    return render_blocks(lines)
 }

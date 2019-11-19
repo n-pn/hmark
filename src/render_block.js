@@ -1,19 +1,16 @@
 const utils = require('./utils')
 
-const scan_blocks = require('./scan_blocks')
+const scan_block = require('./scan_block')
 const render_inline = require('./render_inline')
 
-module.exports = function(input) {
-    const lines = input.replace(/\r\n|\n\r|\r/g, '\n').split('\n')
-    return render_blocks(lines)
+module.exports = render
+
+function render(lines, options) {
+    const blocks = scan_block(lines, options)
+    return blocks.map(x => render_token(x, options)).join('\n')
 }
 
-function render_blocks(lines) {
-    const blocks = scan_blocks(lines)
-    return blocks.map(x => render_block_token(x)).join('\n')
-}
-
-function render_block_token(token) {
+function render_token(token) {
     switch (token.tag) {
         case 'nl':
             return ''
@@ -27,10 +24,10 @@ function render_block_token(token) {
         case 'h4':
         case 'h5':
         case 'h6':
-            return utils.render_tag(token.tag, render_inline(token.body))
+            return utils.render.tag(token.tag, render_inline(token.body))
 
         case 'p':
-            return utils.render_tag('p', render_inline(token.body))
+            return utils.render.tag('p', render_inline(token.body))
 
         case 'code':
             return render_code_block(token.body, token.attrs)
@@ -39,15 +36,15 @@ function render_block_token(token) {
             return `<table>${render_table(token.rows)}</table>`
 
         case 'blockquote':
-            return `<blockquote>${render_blocks(token.body)}</blockquote>`
+            return `<blockquote>${render(token.body)}</blockquote>`
 
         case 'ul':
         case 'ol':
             let li_html = ''
             for (let list of token.body) {
-                li_html += render_blocks(list) + '\n'
+                li_html += render(list) + '\n'
             }
-            return utils.render_tag(token.tag, li_html)
+            return utils.render.tag(token.tag, li_html)
 
         case 'tl':
             let tl_html = ''
@@ -56,9 +53,9 @@ function render_block_token(token) {
                 let text = render_inline(task.text)
                 let attrs = { class: 'li _uncheck' }
                 if (task.done) attrs = { class: 'li _checked' }
-                tl_html += utils.render_tag('div', text, attrs) + '\n'
+                tl_html += utils.render.tag('div', text, attrs) + '\n'
             }
-            return utils.render_tag('div', tl_html, { class: 'tl' })
+            return utils.render.tag('div', tl_html, { class: 'tl' })
 
         case 'custom':
             return render_custom_token(token)
@@ -80,14 +77,14 @@ function render_custom_token({ name, body, attrs, short }) {
         case 'h5':
         case 'h6':
             // TODO: accept some attributes?
-            return utils.render_tag(name, render_inline(token), {})
+            return utils.render.tag(name, render_inline(token), {})
 
         case 'img':
             const img_url = body.length > 0 ? body[0] : attrs.src
             const img_alt = attrs.alt || img_url
 
             const img_html = `<img src="${img_url}" alt="${img_alt}" />`
-            return utils.render_tag('a', img_html, {
+            return utils.render.tag('a', img_html, {
                 class: 'img',
                 rel: 'noopenner noreferrer',
             })
@@ -96,7 +93,7 @@ function render_custom_token({ name, body, attrs, short }) {
             return render_code_block(body, attrs)
 
         case 'blockquote':
-            return `<blockquote>${render_blocks(body)}</blockquote>`
+            return `<blockquote>${render(body)}</blockquote>`
 
         default:
             const e_attrs = utils.render.attrs(attrs)
@@ -180,7 +177,7 @@ function render_row(cols, aligns, tag = 'td') {
             i += span - 1
         }
 
-        output += utils.render_tag(tag, render_inline(cols[i]), attrs)
+        output += utils.render.tag(tag, render_inline(cols[i]), attrs)
         output += '\n'
     }
 

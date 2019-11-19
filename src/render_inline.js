@@ -1,22 +1,26 @@
 const utils = require('./utils')
+const scan_inline = require('./scan_inline')
 
-module.exports = function(tokens) {
+module.exports = function(line) {
+    const chars = utils.split.split_inline(line)
+    const tokens = scan_inline(chars)
+
     return tokens.map(token => render_inline_token(token)).join('')
 }
 
 function render_inline_token(token) {
     switch (token.tag) {
         case 'text':
-            return utils.escape_text(token.value)
+            return utils.render.text(token.value)
 
         case 'code':
-            return utils.render_tag('code', utils.escape_text(token.value))
+            return utils.render.tag('code', utils.render.text(token.value))
 
         case 'strong':
         case 'em':
             let x_body = token.body.map(x => render_inline_token(x)).join('')
 
-            return utils.render_tag(token.tag, x_body)
+            return utils.render.tag(token.tag, x_body)
 
         case 'inline':
             return render_custom_token(token)
@@ -24,7 +28,7 @@ function render_inline_token(token) {
         // let attrs = t.attrs.map(
         //     ([k, v]) => `${k}="${utils.escape_attr(v)}"`
         // )
-        // let body = utils.escape_text(t.body)
+        // let body = utils.render.text(t.body)
         //
 
         default:
@@ -39,14 +43,14 @@ function render_custom_token(token) {
                 token.body,
                 token.attrs.lang
             )
-            return utils.render_tag('code', value, {
+            return utils.render.tag('code', value, {
                 'data-lang': language,
             })
 
         case 'kbd':
         case 'var':
         case 'output':
-            return utils.render_tag(token.name, utils.escape_text(token.value))
+            return utils.render.tag(token.name, utils.render.text(token.value))
 
         case 'strong':
         case 'em':
@@ -57,7 +61,7 @@ function render_custom_token(token) {
         case 'del':
         case 'mark':
             let il_body = this.render_inline(token.body)
-            return utils.render_tag(token.name, il_body)
+            return utils.render.tag(token.name, il_body)
 
         default:
             let xx_attrs = ''
@@ -69,7 +73,7 @@ function render_custom_token(token) {
             if (token.short) {
                 return `[${t.name}${xx_attrs}/]`
             } else {
-                let xx_body = utils.escape_text(token.body)
+                let xx_body = utils.render.text(token.body)
                 return `[${t.name}${xx_attrs}]${xx_body}[/${t.name}]`
             }
     }
