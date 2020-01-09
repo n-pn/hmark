@@ -1,6 +1,6 @@
 import may_escape from '../parse_utils/may_escape'
 
-export default function scan_emoji(chars: Array<string>, index: number = 0) {
+export default function scan_emoji(chars: string[], index: number = 0) {
     let caret = index + 1
 
     for (; caret < chars.length; caret++) {

@@ -1,6 +1,6 @@
 import may_escape from '../parse_utils/may_escape'
 
-export default function scanner(chars: Array<string>, index: number = 0) {
+export default function scanner(chars: string[], index: number = 0) {
     let caret = index + 1
     while (chars[caret] === '`') caret++
 

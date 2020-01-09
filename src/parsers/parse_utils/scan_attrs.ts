@@ -1,6 +1,6 @@
 import may_escape from './may_escape'
 
-export default function parse_attrs(chars: string | Array<string>) {
+export default function parse_attrs(chars: string | string[]) {
     if (typeof chars === 'string') chars = Array.from(chars)
 
     let ret = {}
