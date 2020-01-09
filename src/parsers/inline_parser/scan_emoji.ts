@@ -6,7 +6,7 @@ export default function scan_emoji(chars: string[], index: number = 0) {
     for (; caret < chars.length; caret++) {
         const char = chars[caret]
         if (char === ':' && caret - index > 1) {
-            return [chars.slice(index + 1, caret), caret]
+            return [caret, chars.slice(index + 1, caret)]
         }
 
         if (!is_letter(char)) break

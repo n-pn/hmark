@@ -7,7 +7,7 @@ export default function scanner(chars: string[], index: number = 0) {
     for (; caret < chars.length; caret++) {
         const char = chars[caret]
         if (char === '`' && chars[caret + 1] !== '`') {
-            return [chars.slice(index + 1, caret), caret]
+            return [caret, chars.slice(index + 1, caret)]
         }
 
         if (char === '\\' && may_escape(chars[caret + 1])) caret++

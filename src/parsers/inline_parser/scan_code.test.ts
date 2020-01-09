@@ -1,25 +1,26 @@
 import scanner from './scan_code'
 
-function assert_eq(inp: string, out: any) {
-    const chars = Array.from(inp)
-    if (out) out[0] = Array.from(out[0])
-    const res = scanner(chars, 0)
-    expect(res).toEqual(out)
+function expect_eq(inp: string, [caret, value]: [number, string]) {
+    expect(scanner(Array.from(inp))).toEqual([caret, Array.from(value)])
+}
+
+function expect_null(inp: string) {
+    expect(scanner(Array.from(inp))).toBeNull()
 }
 
 test('detects valid code spans', () => {
-    assert_eq('`\\*`', ['\\*', 3])
-    assert_eq('`\\``', ['\\`', 3])
-    assert_eq('`x`', ['x', 2])
-    assert_eq('`x` ', ['x', 2])
-    assert_eq('`xy`', ['xy', 3])
-    assert_eq('`xy`x', ['xy', 3])
-    assert_eq('`x y`', ['x y', 4])
-    assert_eq('`x y`z', ['x y', 4])
+    expect_eq('`\\*`', [3, '\\*'])
+    expect_eq('`\\``', [3, '\\`'])
+    expect_eq('`x`', [2, 'x'])
+    expect_eq('`x` ', [2, 'x'])
+    expect_eq('`xy`', [3, 'xy'])
+    expect_eq('`xy`x', [3, 'xy'])
+    expect_eq('`x y`', [4, 'x y'])
+    expect_eq('`x y`z', [4, 'x y'])
 })
 
 test('ignores invalid code spans', () => {
-    assert_eq('``', null)
-    assert_eq('`````', null)
-    assert_eq('`````abc', null)
+    expect_null('``')
+    expect_null('`````')
+    expect_null('`````abc')
 })
