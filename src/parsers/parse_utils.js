@@ -1,4 +1,4 @@
-exports.parse_attrs = input => {
+export function parse_attrs(input) {
     if (typeof input === 'string') input = exports.tokenize(input)
 
     let output = {}
@@ -40,7 +40,7 @@ exports.parse_attrs = input => {
     return output
 }
 
-exports.tokenize = input => {
+export function tokenize(input) {
     const chars = Array.from(input)
 
     let output = []
@@ -60,7 +60,7 @@ exports.tokenize = input => {
     return output
 }
 
-function may_escape(char) {
+export function may_escape(char) {
     switch (char) {
         // case '~':
         // case '$':

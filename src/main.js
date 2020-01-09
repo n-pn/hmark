@@ -1,3 +1,3 @@
-export function to_html(str) {
-    return `<p>${str}</p>`
+export default function hmark(str) {
+    return `<p>${str}</p>\n`
 }
