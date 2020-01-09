@@ -1,4 +1,4 @@
-const parse_link = require('./parse_link')
+const parse_link = require('./scan_link')
 
 const { tokenize } = require('../parse_utils')
 
