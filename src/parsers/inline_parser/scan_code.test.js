@@ -1,23 +1,22 @@
 import scan_code from './scan_code'
 
-function assert_eq(str, pos) {
-    const chars = Array.from(str)
-    const idx = scan_code(chars, 0)
-    expect(idx).toEqual(pos)
+function assert_eq(inp, out) {
+    const res = scan_code(inp, 0)
+    expect(res).toEqual(out)
 }
 
-test('test valid code spans', () => {
-    assert_eq('`x`', 2)
-    assert_eq('`x` ', 2)
-    assert_eq('`xy`', 3)
-    assert_eq('`xy`x', 3)\
-    assert_eq('`x y`', 4)
-    assert_eq('`x y`', 4)
-    assert_eq('`\\``', 3)
+test('find valid code spans', () => {
+    assert_eq('`x`', ['x', 2])
+    assert_eq('`x` ', ['x', 2])
+    assert_eq('`xy`', ['xy', 3])
+    assert_eq('`xy`x', ['xy', 3])
+    assert_eq('`x y`', ['x y', 4])
+    assert_eq('`x y`z', ['x y', 4])
+    assert_eq('`\\``', ['\\`', 3])
 })
 
-test('test invalid code spans', () => {
-    assert_eq('``', -1)
-    assert_eq('`````', -1)
-    assert_eq('`````abc', -1)
+test('skip invalid code spans', () => {
+    assert_eq('``', null)
+    assert_eq('`````', null)
+    assert_eq('`````abc', null)
 })
