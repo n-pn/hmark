@@ -1,5 +1,6 @@
 {
     "name": "@nipin/hmark",
+    "author": "Nipinium",
     "description": "Implementation of highmark in javascript",
     "version": "0.0.1",
     "main": "dist/hmark.cjs.js",
