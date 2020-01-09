@@ -1,10 +1,7 @@
 import typescript from '@rollup/plugin-typescript'
-import resolve from 'rollup-plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs'
 import { uglify } from 'rollup-plugin-uglify'
 import pkg from './package.json'
 
-const ts = typescript({ lib: ['es5', 'es6', 'dom'], target: 'es5' })
 export default [
     // browser-friendly UMD build
     {
@@ -14,7 +11,10 @@ export default [
             file: pkg.browser,
             format: 'umd',
         },
-        plugins: [ts, resolve(), commonjs(), uglify()],
+        plugins: [
+            typescript({ lib: ['es5', 'es6', 'dom'], target: 'es5' }),
+            uglify(),
+        ],
     },
 
     // CommonJS (for Node) and ES module (for bundlers) build.
@@ -25,6 +25,6 @@ export default [
             { file: pkg.main, format: 'cjs' },
             { file: pkg.module, format: 'es' },
         ],
-        plugins: [ts],
+        plugins: [typescript({ target: 'es6' })],
     },
 ]
