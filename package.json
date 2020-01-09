@@ -4,7 +4,6 @@
     "version": "0.0.1",
     "main": "dist/hmark.cjs.js",
     "module": "dist/hmark.esm.js",
-    "browser": "dist/hmark.umd.js",
     "license": "MIT",
     "repository": {
         "type": "git",
