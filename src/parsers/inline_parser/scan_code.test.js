@@ -1,6 +1,8 @@
 import scan_code from './scan_code'
 
 function assert_eq(inp, out) {
+    inp = Array.from(inp)
+    if (out) out[0] = Array.from(out[0])
     const res = scan_code(inp, 0)
     expect(res).toEqual(out)
 }
