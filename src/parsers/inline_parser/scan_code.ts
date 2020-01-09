@@ -1,6 +1,6 @@
-import { may_escape } from '../parse_utils'
+import may_escape from '../parse_utils/may_escape'
 
-export default function parse_code(inp, idx) {
+export default function parse_code(inp: Array<string>, idx: number = 0) {
     let pos = idx + 1
     while (inp[pos] === '`') pos++
 

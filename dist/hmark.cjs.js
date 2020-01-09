@@ -1,9 +1,7 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
-function to_html(str) {
-    return `<p>${str}</p>`
+function hmark(str) {
+    return "<p>" + str + "</p>\n";
 }
 
-exports.to_html = to_html;
+module.exports = hmark;

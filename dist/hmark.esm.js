@@ -1,5 +1,5 @@
-function to_html(str) {
-    return `<p>${str}</p>`
+function hmark(str) {
+    return "<p>" + str + "</p>\n";
 }
 
-export { to_html };
+export default hmark;
