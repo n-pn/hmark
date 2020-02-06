@@ -17,9 +17,9 @@ TODO
 
 **Markup:**
 
--   Inline element with no attribute: `[mark]content[/mark]`
--   Inline element with attributes: `[mark attr1="value1" attr2="value2"]content[/mark]`
--   Inline element short hand: `[mark body="content" /]`
+- Inline element with no attribute: `[mark]content[/mark]`
+- Inline element with attributes: `[mark attr1="value1" attr2="value2"]content[/mark]`
+- Inline element short hand: `[mark body="content" /]`
 
 **Example**
 
@@ -31,8 +31,8 @@ _Yield:_
 
 ```htm
 <p>
-    Lorem <strong>ipsum <em>dolor</em> sit</strong> amet,
-    <a href="http://consectetur.com">consectetur</a> adipisicing elit.
+  Lorem <strong>ipsum <em>dolor</em> sit</strong> amet,
+  <a href="http://consectetur.com">consectetur</a> adipisicing elit.
 </p>
 ```
 
@@ -95,22 +95,22 @@ _Output_
 _Markup_
 
 ```md
--   list item 1
--   list item 2
+- list item 1
+- list item 2
 ```
 
 _Output_
 
--   list item 1
--   list item 2
+- list item 1
+- list item 2
 
 **Ordered list**
 
 _Markup_
 
 ```md
--   list item 1
--   list item 2
+- list item 1
+- list item 2
 ```
 
 _Output_
@@ -162,71 +162,71 @@ TODO
 
 **Markup:**
 
--   No attribute:
+- No attribute:
 
-    ```
-    [[tag]]
-    content
-    [[/tag]]
-    ```
+  ```
+  [[tag]]
+  content
+  [[/tag]]
+  ```
 
--   With attributes:
+- With attributes:
 
-    ```
-    [[tag attr1="value1" attr2="value2"]]
-    content
-    [/url]
-    ```
+  ```
+  [[tag attr1="value1" attr2="value2"]]
+  content
+  [/url]
+  ```
 
--   auto closing
-    ```
-    [[tag option="value" body="content" /]]
-    ```
+- auto closing
+  ```
+  [[tag option="value" body="content" /]]
+  ```
 
 Examples:
 
 1. Syntax highlight
 
-    ```
-    [[code lang="ruby"]]
-    print "Hey!"
-    [[/code]]
-    ```
+   ```
+   [[code lang="ruby"]]
+   print "Hey!"
+   [[/code]]
+   ```
 
 2. Ascii art, poems
 
-    ```
-    [[ascii]]
-    /\_/\
-    =( °w° )=
-    )   (  //
-    (__ __)//
-    [[/ascii]]
-    ```
+   ```
+   [[ascii]]
+   /\_/\
+   =( °w° )=
+   )   (  //
+   (__ __)//
+   [[/ascii]]
+   ```
 
 3. Spoiler/collapsible block
 
-    ```
-    [[spoiler title="Spoiler"]]
-    Hidden content.
-    [[/spoiler]]
-    ```
+   ```
+   [[spoiler title="Spoiler"]]
+   Hidden content.
+   [[/spoiler]]
+   ```
 
 4. Math block
 
-    ```
-    [[math syntax="latext"]]
-    \Gamma(z) = \int_0^\infty t^[z-1]e^[-t]dt\,.
-    [[/math]]
-    ```
+   ```
+   [[math syntax="latext"]]
+   \Gamma(z) = \int_0^\infty t^[z-1]e^[-t]dt\,.
+   [[/math]]
+   ```
 
 5. Hidden content
 
-    ```
-    [[crypted hash="hmark"]]
-    U2FsdGVkX18dmf1WcEODtR/m0vnPezX918/9/qHI56g=
-    [[/crypted]]
-    ```
+   ```
+   [[crypted hash="hmark"]]
+   U2FsdGVkX18dmf1WcEODtR/m0vnPezX918/9/qHI56g=
+   [[/crypted]]
+   ```
 
 ## License
 

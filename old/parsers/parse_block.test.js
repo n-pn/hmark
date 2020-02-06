@@ -1,3 +1,3 @@
-test('block', () => {
-    expect(true).toBe(true)
-})
+test("block", () => {
+  expect(true).toBe(true);
+});

@@ -1,30 +1,30 @@
 {
-    "name": "@nipin/hmark-demo",
-    "description": "showcase for highmark",
-    "version": "0.0.1",
-    "private": true,
-    "scripts": {
-        "dev": "sapper dev",
-        "build": "sapper build",
-        "export": "sapper export",
-        "start": "node __sapper__/build"
-    },
-    "dependencies": {
-        "body-parser": "^1.19.0",
-        "compression": "^1.7.0",
-        "polka": "next",
-        "sirv": "^0.4.0"
-    },
-    "devDependencies": {
-        "@nipin/hmark": "file:..",
-        "@nipin/melte": "https://github.com/nipinium/melte",
-        "css-loader": "^3.4.1",
-        "mini-css-extract-plugin": "^0.9.0",
-        "node-sass": "^4.13.0",
-        "sapper": "^0.27.0",
-        "sass-loader": "^8.0.0",
-        "svelte": "^3.0.0",
-        "svelte-loader-hot": "^0.1.1",
-        "webpack": "^4.41.5"
-    }
+  "name": "@nipin/hmark-demo",
+  "description": "showcase for highmark",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "sapper dev",
+    "build": "sapper build",
+    "export": "sapper export",
+    "start": "node __sapper__/build"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.0",
+    "polka": "next",
+    "sirv": "^0.4.0"
+  },
+  "devDependencies": {
+    "@nipin/hmark": "file:..",
+    "@nipin/melte": "https://github.com/nipinium/melte",
+    "css-loader": "^3.4.1",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.13.0",
+    "sapper": "^0.27.0",
+    "sass-loader": "^8.0.0",
+    "svelte": "^3.0.0",
+    "svelte-loader-hot": "^0.1.1",
+    "webpack": "^4.41.5"
+  }
 }
