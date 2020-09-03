@@ -21,7 +21,7 @@
     "css-loader": "^3.4.1",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.0",
-    "sapper": "^0.27.0",
+    "sapper": "^0.27.11",
     "sass-loader": "^8.0.0",
     "svelte": "^3.0.0",
     "svelte-loader-hot": "^0.1.1",
