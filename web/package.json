@@ -23,7 +23,7 @@
     "node-sass": "^4.14.1",
     "sapper": "^0.28.5",
     "sass-loader": "^10.0.2",
-    "svelte": "^3.24.1",
+    "svelte": "^3.49.0",
     "svelte-loader-hot": "^0.3.1",
     "webpack": "^4.44.1"
   }
